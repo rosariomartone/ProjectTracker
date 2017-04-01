@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\OpportunitiesController.cs" />
     <Compile Include="OAuth\AuthorizeAttributecs.cs" />
     <Compile Include="Controllers\ProjectTrackerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -148,6 +149,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\ProjectTrackerAPI.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
