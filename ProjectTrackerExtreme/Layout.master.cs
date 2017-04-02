@@ -15,11 +15,12 @@ namespace ProjectTrackerExtreme {
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Header.DataBind();
-            SearchBlock.Visible = ShowSearch;
-            if(IsPostBack && hfAction.Contains("search")) {
-                Session["query"] = Search.Text;
-                Response.Redirect("~/Pages/Search.aspx");
-            }
+        }
+
+        public void CheckLogin()
+        {
+            if (Session["ProjectTracker_Token"] == null)
+                Response.Redirect("~/Pages/LoginPage.aspx");
         }
     }
 }

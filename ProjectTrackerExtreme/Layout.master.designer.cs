@@ -9,6 +9,7 @@
 
 namespace ProjectTrackerExtreme {
     
+    
     public partial class Layout {
         
         /// <summary>
@@ -29,33 +30,6 @@ namespace ProjectTrackerExtreme {
         /// </remarks>
         protected global::DevExpress.Web.ASPxPanel TopPanel;
         
-        /// <summary>
-        /// Search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxButtonEdit Search;
-        
-        /// <summary>
-        /// SearchBlock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SearchBlock;
-
-        /// <summary>
-        /// hfAction control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxHiddenField hfAction;
-
         /// <summary>
         /// NavMenu control.
         /// </summary>
