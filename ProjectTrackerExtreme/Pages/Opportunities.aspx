@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
     <br />
-    <div id="gridContainer" style="height:420px; max-width:750px; margin: 0 auto"></div>
-
+    <div id="gridContainer" style="height:420px; width:90%; margin: 0 auto"></div>
     <script>
         $(document).ready(
            function () {
@@ -38,15 +37,12 @@
                                    fileName: "Opportunities",
                                    allowExportSelectedData: true
                                },
-                               groupPanel: {
-                                   visible: true
-                               },
                                columnChooser: {
                                    enabled: true,
                                    mode: "select"
                                },
                                allowColumnReordering: true,
-                               rowAlternationEnabled: true,
+                               //rowAlternationEnabled: true,
                                wordWrapEnabled: true,
                                loadPanel: {
                                    enabled: true
@@ -55,8 +51,8 @@
                                    mode: "virtual"
                                },
                                editing: {
-                                   allowAdding: true,
-                                   allowUpdating: true,
+                                   allowAdding: false,
+                                   allowUpdating: false,
                                    mode: "batch"
                                },
                                sorting: { mode: 'multiple' },
@@ -70,7 +66,8 @@
                                paging: { pageSize: 10 },
                                filterRow: { visible: true },
                                searchPanel: { visible: true },
-                               selection: { mode: 'none' }
+                               selection: { mode: 'multiple' },
+                               hoverStateEnabled: true
                            });
                        },
                        failure: function (response) {
