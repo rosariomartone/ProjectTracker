@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
     <br />
-    <div id="gridContainer" style="height:420px; width:90%; margin: 0 auto"></div>
+    <div id="gridContainer" style="height:70%; width:90%; margin: 0 auto"></div>
     <script>
         $(document).ready(
            function () {
@@ -27,7 +27,19 @@
                                dataSource: opportunities,
                                columns: [
                                    { dataField: 'Id', width: 50 },
-                                   { dataField: 'Name', allowGrouping: false }
+                                   { dataField: 'Name' },
+                                   {
+                                       width: 100,
+                                       alignment: 'center',
+                                       cellTemplate: function (container, options) {
+                                           $('<a/>').addClass('dx-text')
+                                               .text('DETAILS')
+                                               .on('dxclick', function () {
+                                                   alert(options.data.Id);
+                                               })
+                                               .appendTo(container);
+                                       }
+                                   }
                                ],
                                selection: {
                                    mode: "multiple"
@@ -41,14 +53,23 @@
                                    enabled: true,
                                    mode: "select"
                                },
+                               showBorders: true,
                                allowColumnReordering: true,
-                               //rowAlternationEnabled: true,
+                               rowAlternationEnabled: true,
+                               onRowPrepared: function (e) {
+                                   if (e.rowType == 'data') {
+                                       e.rowElement[0].addEventListener("mouseover", function () {
+                                           e.rowElement.find("td").css('background', '#ffdb71');
+                                           e.rowElement.css("transition", "background-color 0.5s");
+                                       });
+                                       e.rowElement[0].addEventListener("mouseleave", function () {
+                                           e.rowElement.find("td").css('background', "");
+                                       });
+                                   }
+                               },
                                wordWrapEnabled: true,
                                loadPanel: {
                                    enabled: true
-                               },
-                               scrolling: {
-                                   mode: "virtual"
                                },
                                editing: {
                                    allowAdding: false,
@@ -57,7 +78,7 @@
                                },
                                sorting: { mode: 'multiple' },
                                pager: {
-                                   allowedPageSizes: [5, 8, 15, 30],
+                                   allowedPageSizes: [10, 20, 50],
                                    showInfo: true,
                                    showNavigationButtons: true,
                                    showPageSizeSelector: true,
