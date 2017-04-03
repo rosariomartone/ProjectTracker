@@ -7,7 +7,7 @@
         $(document).ready(
            function () {
                var opportunities = null;
-               
+
                if (localStorage.getItem('ProjectTracker_Token') == null)
                    document.location.href = "LoginPage.aspx";
                else
