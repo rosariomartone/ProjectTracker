@@ -7,6 +7,7 @@
         $(document).ready(
            function () {
                var opportunities = null;
+               var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
                if (localStorage.getItem('ProjectTracker_Token') == null)
                    document.location.href = "LoginPage.aspx";
@@ -15,7 +16,7 @@
                    var apiToken = localStorage.getItem('ProjectTracker_Token');
                    
                    $.ajax({
-                       url: "http://localhost/ProjectTracker/api/data/opportunities",
+                       url: url + "/ProjectTracker/api/data/opportunities",
                        type: "GET",
                        headers: {
                            'Authorization': "bearer " + apiToken,
@@ -98,6 +99,7 @@
                            DevExpress.ui.notify(text, type, 600);
 
                            localStorage.removeItem('ProjectTracker_Token');
+                           document.location.href = "LoginPage.aspx";
                        },
                        error: function (response) {
                            var type = "error";
@@ -105,6 +107,7 @@
 
                            DevExpress.ui.notify(text, type, 600);
                            localStorage.removeItem('ProjectTracker_Token');
+                           document.location.href = "LoginPage.aspx";
                        }
                    });
                }

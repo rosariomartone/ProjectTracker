@@ -21,7 +21,7 @@ namespace ProjectTrackerAPI
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(10),
                 Provider = prjTrackerProvider
             };
 

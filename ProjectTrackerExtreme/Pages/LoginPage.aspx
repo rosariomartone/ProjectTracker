@@ -52,9 +52,10 @@
         $(document).ready(
             $('#btnLogin').click(function () {
                 var apiToken = null;
+                var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
                 $.ajax({
-                    url: "http://localhost/ProjectTracker/token",
+                    url: url + "/ProjectTracker/token",
                     type: "POST",
                     data : {
                         username : $('#txtUsername').val(),
