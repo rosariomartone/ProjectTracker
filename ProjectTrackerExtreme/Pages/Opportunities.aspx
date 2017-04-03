@@ -7,7 +7,7 @@
         $(document).ready(
            function () {
                var opportunities = null;
-
+               
                if (localStorage.getItem('ProjectTracker_Token') == null)
                    document.location.href = "LoginPage.aspx";
                else
@@ -92,10 +92,19 @@
                            });
                        },
                        failure: function (response) {
-                           alert(response.responseText);
+                           var type = "error";
+                           var text = response.responseText;
+
+                           DevExpress.ui.notify(text, type, 600);
+
+                           localStorage.removeItem('ProjectTracker_Token');
                        },
                        error: function (response) {
-                           alert(response.responseText);
+                           var type = "error";
+                           var text = response.responseText;
+
+                           DevExpress.ui.notify(text, type, 600);
+                           localStorage.removeItem('ProjectTracker_Token');
                        }
                    });
                }
