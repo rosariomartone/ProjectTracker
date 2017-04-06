@@ -188,7 +188,7 @@
             </div>--%>
             <div class="footerDown">
                 <div class="container">
-                    <p>Proxima <%:DateTime.Today.Year.ToString()%> &copy; All Rights Reserved.</p>
+                    <p>company <%:DateTime.Today.Year.ToString()%> &copy; All Rights Reserved.</p>
                 </div>
             </div>
         </footer>

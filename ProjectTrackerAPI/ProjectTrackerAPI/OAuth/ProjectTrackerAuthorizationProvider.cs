@@ -22,7 +22,6 @@ namespace ProjectTrackerAPI
             //Use the Factory repository in order to get the right type of user
             BaseUser user = UserLogic.GetUser(context.UserName, MD5Utility.GetMD5Password(context.Password));
 
-            //Proxima
             if(user != null)
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, user.Role.Name));
