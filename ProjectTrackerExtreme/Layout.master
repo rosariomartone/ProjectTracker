@@ -26,9 +26,57 @@
     <script type="text/javascript" src="<%# ResolveUrl("~/Scripts/dx.web.js")%>"></script>
     <link rel="stylesheet" type="text/css" href="<%# ResolveUrl("~/Content/dx.common.css")%>" />
 	<link rel="stylesheet" type="text/css" href="<%# ResolveUrl("~/Content/dx.light.css")%>" />
+
+    <script>
+        function MenuItemClick(e) {
+            var i = e.item.name;
+
+            if (i == "btnLogout")
+            {
+                e.processOnServer = false;
+                localStorage.removeItem('ProjectTracker_Token');
+                document.location.href = "LoginPage.aspx";
+            }
+        }
+        
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
+        <script>
+            $(document).ready(
+                $('#btnLogin').click(function () {
+                    var apiToken = null;
+                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+
+                    $.ajax({
+                        url: url + "/ProjectTracker/token",
+                        type: "POST",
+                        data : {
+                            username : $('#txtUsername').val(),
+                            password : $('#txtPassword').val(),
+                            grant_type : "password"
+                        },
+                        success: function (data) {
+                            localStorage.setItem("ProjectTracker_Token", data.access_token);
+                            document.location.href = "Opportunities.aspx";
+                        },
+                        failure: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
+
+                            DevExpress.ui.notify(text, type, 600);
+                        },
+                        error: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
+
+                            DevExpress.ui.notify(text, type, 600);
+                        }
+                    });
+                })
+            );
+        </script>
     <div class="wrapper">
         <header>
             <div class="container">
@@ -57,10 +105,26 @@
                                 <div class="pull-right">
                                     <div class="panelItem">
                                         <dx:ASPxMenu ID="NavMenu" runat="server" ClientInstanceName="NavMenu" EnableAnimation="true" CssClass="navMenu">
+                                            <ClientSideEvents Init="function(s, e) { 
+                                                    if (localStorage.getItem('ProjectTracker_Token') == null)
+                                                    {
+                                                        NavMenu.GetItemByName('btnLogin').SetVisible(true);
+                                                        NavMenu.GetItemByName('btnLogout').SetVisible(false);
+                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(false);
+                                                    }
+                                                    else
+                                                    {
+                                                        NavMenu.GetItemByName('btnLogin').SetVisible(false);
+                                                        NavMenu.GetItemByName('btnLogout').SetVisible(true);
+                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(true);
+                                                    }
+                                                }" ItemClick="function(s, e) { MenuItemClick(e); }" />
                                             <ItemStyle Paddings-PaddingLeft="22" Paddings-PaddingRight="22" />
                                             <Items>
                                                 <dx:MenuItem Text="HOME" NavigateUrl="~/Pages/Home.aspx" />
-                                                <dx:MenuItem Text="Opportunities" NavigateUrl="~/Pages/Opportunities.aspx" />
+                                                <dx:MenuItem Name="btnLogin" Text="Login" NavigateUrl="~/Pages/LoginPage.aspx" />
+                                                <dx:MenuItem Name="btnOpportunities" Text="Opportunities" NavigateUrl="~/Pages/Opportunities.aspx" />
+                                                <dx:MenuItem Name="btnLogout" Text="Logout" NavigateUrl="#" />
                                             </Items>
                                         </dx:ASPxMenu>
                                     </div>
