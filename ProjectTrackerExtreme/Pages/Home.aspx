@@ -12,7 +12,7 @@
 <div class="container">
     <section class="row text-center">
         <div class="col-md-12">
-            <h1>ASP.NET Bootstrapped Web Site</h1>
+            <h1>ASP.NET Bootstrapped Web Site for</h1>
             <p class="mainText">This website is based on the Bootstrapped Web Site project template available in the DevExpress Template Gallery. This template utilizes DevExpress ASP.NET AJAX controls in conjunction with the Bootstrap framework to create a website with multi-page design and responsive, mobile-friendly interface out of the box. By default, the website has a format of a <a href="<%: ResolveUrl("~/Pages/BlogTimeline.aspx") %>">blog</a> with integrated <a href="<%: ResolveUrl("~/Pages/Search.aspx") %>">full-text search</a><br /><br />If you are using a custom Bootstrap theme, it is recommended that you manually modify the base color in the DevExpress theme of your choice to better suit the overall color scheme. You can accomplish this task using the DevExpress Theme Builder.</p>
         </div>
         <div class="col-md-12 marginTop20">

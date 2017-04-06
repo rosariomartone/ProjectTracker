@@ -9,6 +9,7 @@
 
 namespace ProjectTrackerExtreme {
     
+    
     public partial class Home {
         
         /// <summary>
@@ -19,14 +20,5 @@ namespace ProjectTrackerExtreme {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxImageSlider ImageSlider;
-        
-        /// <summary>
-        /// ProductsGallery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxImageGallery ProductsGallery;
     }
 }
