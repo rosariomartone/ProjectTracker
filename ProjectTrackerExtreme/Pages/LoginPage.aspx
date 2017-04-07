@@ -1,53 +1,33 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout.master" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="ProjectTrackerExtreme.Pages.LoginPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
-    <br />
-    <br />
-    <div id="login-overlay" class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Login to site.com</h4>
-          </div>
-          <div class="modal-body">
-              <div class="row">
-                  <div class="col-xs-6">
-                      <div class="well">                          
-                        <div class="form-group">
-                            <label for="username" class="control-label">Username</label>
-                            <input type="text" class="form-control" id="txtUsername" name="txtUsername" value="" required="" title="Please enter your username">
-                            <span class="help-block"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="control-label">Password</label>
-                            <input type="password" class="form-control" id="txtPassword" name="txtPassword" value="" required="" title="Please enter your password">
-                            <span class="help-block"></span>
-                        </div>
-                        <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
-                        <%--<div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember" id="remember"> Remember login
-                            </label>
-                            <p class="help-block">(if this is a private computer)</p>
-                        </div>--%>
-                        <input type="button" id="btnLogin" value="Login" class="btn btn-success center-block" />                          
-                      </div>
-                  </div>
-                  <div class="col-xs-6">
-                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
-                      <ul class="list-unstyled" style="line-height: 2">
-                          <li><span class="fa fa-check text-success"></span> See all your opportunities</li>
-                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
-                          <li><a href="/read-more/"><u>Read more</u></a></li>
-                      </ul>
-                      <%--<p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>--%>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="container">
+    
+        <div class="row" style="margin-top:60px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">    	        
+			    <fieldset>
+				    <h2>Please Sign In</h2>
+				    <hr class="colorgraph">
+				    <div class="form-group">
+                        <input type="email" name="txtUsername" id="txtUsername" class="form-control input-lg" placeholder="email">
+				    </div>
+				    <div class="form-group">
+                        <input type="password" name="txtPassword" id="txtPassword" class="form-control input-lg" placeholder="password">
+					    <a href="ForgottenPage.aspx" class="btn btn-link pull-right">Forgot Password?</a>
+				    </div>
+				    <hr class="colorgraph">
+				    <div class="row">
+					    <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input id="btnLogin" name="btnLogin" type="button" class="btn btn-lg btn-success btn-block" value="Sign In">
+					    </div>
+					    <div class="col-xs-6 col-sm-6 col-md-6">
+						    <a href="RegistrationPage.aspx" class="btn btn-lg btn-primary btn-block">Register</a>
+					    </div>
+				    </div>
+			    </fieldset>		        
+	        </div>
+        </div>
+
+    </div>  
     <script>
         $(document).ready(
             $('#btnLogin').click(function () {
