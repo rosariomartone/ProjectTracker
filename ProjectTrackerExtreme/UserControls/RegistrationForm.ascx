@@ -156,22 +156,22 @@
                         password: $('#txtPassword').val()
                     },
                     success: function (data) {
-                        var type = "success";
-                        var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtPassword').val();
+                        var type = "info";
+                        var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
 
-                        DevExpress.ui.notify(text, type, 600);
+                        DevExpress.ui.notify(text, type, 3000);
                     },
                     failure: function (response) {
                         var type = "error";
                         var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 600);
+                        DevExpress.ui.notify(text, type, 3000);
                     },
                     error: function (response) {
                         var type = "error";
                         var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 600);
+                        DevExpress.ui.notify(text, type, 3000);
                     }
                 });
             });

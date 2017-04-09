@@ -50,13 +50,13 @@
                         var type = "error";
                         var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 600);
+                        DevExpress.ui.notify(text, type, 3000);
                     },
                     error: function (response) {
                         var type = "error";
                         var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 600);
+                        DevExpress.ui.notify(text, type, 3000);
                     }
                 });
             })
