@@ -1,0 +1,1 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ForgottenPassword.ascx.cs" Inherits="ProjectTrackerExtreme.UserControls.ForgottenPassword" %>

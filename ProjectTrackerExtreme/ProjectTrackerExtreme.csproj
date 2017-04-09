@@ -171,6 +171,7 @@
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.debug.js" />
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.js" />
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.node.js" />
+    <Content Include="UserControls\ForgottenPassword.ascx" />
     <Content Include="UserControls\RegistrationForm.ascx" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +252,13 @@
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ForgottenPassword.ascx.cs">
+      <DependentUpon>ForgottenPassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ForgottenPassword.ascx.designer.cs">
+      <DependentUpon>ForgottenPassword.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RegistrationForm.ascx.cs">
       <DependentUpon>RegistrationForm.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
