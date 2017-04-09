@@ -81,7 +81,6 @@
     <Reference Include="DevExpress.Web.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BlogPosts.xml" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dx.android5.light.css" />
     <Content Include="Content\dx.common.css" />
@@ -172,8 +171,7 @@
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.debug.js" />
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.js" />
     <Content Include="Scripts\vectormap-utils\dx.vectormaputils.node.js" />
-    <Content Include="UserControls\AddCommentForm.ascx" />
-    <Content Include="UserControls\BlogNavigation.ascx" />
+    <Content Include="UserControls\RegistrationForm.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Layout.master" />
@@ -207,7 +205,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\BlogPosts.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,19 +251,12 @@
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\AddCommentForm.ascx.cs">
-      <DependentUpon>AddCommentForm.ascx</DependentUpon>
+    <Compile Include="UserControls\RegistrationForm.ascx.cs">
+      <DependentUpon>RegistrationForm.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\AddCommentForm.ascx.designer.cs">
-      <DependentUpon>AddCommentForm.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\BlogNavigation.ascx.cs">
-      <DependentUpon>BlogNavigation.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\BlogNavigation.ascx.designer.cs">
-      <DependentUpon>BlogNavigation.ascx</DependentUpon>
+    <Compile Include="UserControls\RegistrationForm.ascx.designer.cs">
+      <DependentUpon>RegistrationForm.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +264,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Code\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

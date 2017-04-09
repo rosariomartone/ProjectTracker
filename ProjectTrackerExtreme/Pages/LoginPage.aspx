@@ -35,7 +35,7 @@
                 var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
                 $.ajax({
-                    url: url + "/ProjectTracker/token",
+                    url: url + "/token",
                     type: "POST",
                     data : {
                         username : $('#txtUsername').val(),

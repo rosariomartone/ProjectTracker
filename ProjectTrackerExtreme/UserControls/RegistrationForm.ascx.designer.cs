@@ -10,15 +10,6 @@
 namespace ProjectTrackerExtreme.UserControls {
     
     
-    public partial class BlogNavigation {
-        
-        /// <summary>
-        /// BlogsCategoriesNavBar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxNavBar BlogCategoriesNavBar;
+    public partial class AddCommentForm {
     }
 }
