@@ -85,5 +85,32 @@ namespace ProjectTrackerDataAccess
 
             return addUser;
         }
+
+        public long RetrieveUser(ClientUser user)
+        {
+            long retrieveUser = 0;
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_RetrieveUser"
+                };
+
+                var parameterEmail = new SqlParameter("@email", SqlDbType.VarChar) { Value = user.Email };
+                command.Parameters.Add(parameterEmail);
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                if (reader.Read())
+                    retrieveUser = reader.GetInt32(0);
+            }
+
+            return retrieveUser;
+        }
     }
 }

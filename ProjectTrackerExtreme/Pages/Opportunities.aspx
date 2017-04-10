@@ -22,7 +22,7 @@
                    var apiToken = localStorage.getItem('ProjectTracker_Token');
                    
                    $.ajax({
-                       url: url + "/ProjectTracker/api/data/opportunities",
+                       url: url + "/api/data/opportunities",
                        type: "GET",
                        headers: {
                            'Authorization': "bearer " + apiToken,
@@ -102,7 +102,7 @@
                            var type = "error";
                            var text = response.responseText;
 
-                           DevExpress.ui.notify(text, type, 600);
+                           DevExpress.ui.notify(text, type, 3000);
 
                            localStorage.removeItem('ProjectTracker_Token');
                            document.location.href = "LoginPage.aspx";
@@ -111,7 +111,7 @@
                            var type = "error";
                            var text = response.responseText;
 
-                           DevExpress.ui.notify(text, type, 600);
+                           DevExpress.ui.notify(text, type, 3000);
                            localStorage.removeItem('ProjectTracker_Token');
                            document.location.href = "LoginPage.aspx";
                        }

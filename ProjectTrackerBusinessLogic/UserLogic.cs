@@ -18,5 +18,12 @@ namespace ProjectTrackerBusinessLogic
 
             return u.RegisterNewUser(user);
         }
+
+        public static long RetrieveUser(ClientUser user)
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.RetrieveUser(user);
+        }
     }
 }
