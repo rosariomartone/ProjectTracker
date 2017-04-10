@@ -143,37 +143,57 @@
             });
 
             $('#btnRegister').click(function () {
-                var apiToken = null;
-                var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                if ($('#txtFirstname').val() != "" && $('#txtSurname').val() != "" && $('#txtEmailConfirm').val() != "" && $('#txtEmail').val() != "" && $('#txtPassword').val() != "")
+                {
+                    if ($('#txtEmailConfirm').val() == $('#txtEmail').val())
+                    {
+                        var apiToken = null;
+                        var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                $.ajax({
-                    url: url + "/api/data/registration",
-                    type: "POST",
-                    data: {
-                        firstname: $('#txtFirstname').val(),
-                        surname: $('#txtSurname').val(),
-                        email: $('#txtEmail').val(),
-                        password: $('#txtPassword').val()
-                    },
-                    success: function (data) {
-                        var type = "info";
-                        var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
+                        $.ajax({
+                            url: url + "/api/data/registration",
+                            type: "POST",
+                            data: {
+                                firstname: $('#txtFirstname').val(),
+                                surname: $('#txtSurname').val(),
+                                email: $('#txtEmail').val(),
+                                password: $('#txtPassword').val()
+                            },
+                            success: function (data) {
+                                var type = "info";
+                                var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    },
-                    failure: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                                DevExpress.ui.notify(text, type, 3000);
+                            },
+                            failure: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    },
-                    error: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                                DevExpress.ui.notify(text, type, 3000);
+                            },
+                            error: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
+
+                                DevExpress.ui.notify(text, type, 3000);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        var type = "warning";
+                        var text = "Email does not match with confirm Email!";
 
                         DevExpress.ui.notify(text, type, 3000);
                     }
-                });
+                }
+                else
+                {
+                    var type = "warning";
+                    var text = "Required fields not set!";
+
+                    DevExpress.ui.notify(text, type, 3000);
+                }                
             });
         })
     );

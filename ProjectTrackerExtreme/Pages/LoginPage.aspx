@@ -29,34 +29,44 @@
     <script>
         $(document).ready(
             $('#btnLogin').click(function () {
-                var apiToken = null;
-                var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                if ($('#txtUsername').val() != "" && $('#txtPassword').val() != "")
+                {
+                    var apiToken = null;
+                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                $.ajax({
-                    url: url + "/token",
-                    type: "POST",
-                    data : {
-                        username : $('#txtUsername').val(),
-                        password : $('#txtPassword').val(),
-                        grant_type : "password"
-                    },
-                    success: function (data) {
-                        localStorage.setItem("ProjectTracker_Token", data.access_token);
-                        document.location.href = "Opportunities.aspx";
-                    },
-                    failure: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                    $.ajax({
+                        url: url + "/token",
+                        type: "POST",
+                        data : {
+                            username : $('#txtUsername').val(),
+                            password : $('#txtPassword').val(),
+                            grant_type : "password"
+                        },
+                        success: function (data) {
+                            localStorage.setItem("ProjectTracker_Token", data.access_token);
+                            document.location.href = "Opportunities.aspx";
+                        },
+                        failure: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    },
-                    error: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                            DevExpress.ui.notify(text, type, 3000);
+                        },
+                        error: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    }
-                });
+                            DevExpress.ui.notify(text, type, 3000);
+                        }
+                    });
+                }
+                else
+                {
+                    var type = "warning";
+                    var text = "Required fields not set!";
+
+                    DevExpress.ui.notify(text, type, 3000);
+                }
             })
         );
     </script>

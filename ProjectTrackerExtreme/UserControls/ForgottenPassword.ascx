@@ -107,34 +107,44 @@
             });
 
             $('#btnRetrieve').click(function () {
-                var apiToken = null;
-                var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                if ($('#txtEmail').val() != "")
+                {
+                    var apiToken = null;
+                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                $.ajax({
-                    url: url + "/api/data/forgotten",
-                    type: "POST",
-                    data: {
-                        email: $('#txtEmail').val()
-                    },
-                    success: function (data) {
-                        var type = "info";
-                        var text = "Your credentials have been sent to " + $('#txtEmail').val();
+                    $.ajax({
+                        url: url + "/api/data/forgotten",
+                        type: "POST",
+                        data: {
+                            email: $('#txtEmail').val()
+                        },
+                        success: function (data) {
+                            var type = "info";
+                            var text = "Your credentials have been sent to " + $('#txtEmail').val();
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    },
-                    failure: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                            DevExpress.ui.notify(text, type, 3000);
+                        },
+                        failure: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    },
-                    error: function (response) {
-                        var type = "error";
-                        var text = response.responseText;
+                            DevExpress.ui.notify(text, type, 3000);
+                        },
+                        error: function (response) {
+                            var type = "error";
+                            var text = response.responseText;
 
-                        DevExpress.ui.notify(text, type, 3000);
-                    }
-                });
+                            DevExpress.ui.notify(text, type, 3000);
+                        }
+                    });
+                }
+                else
+                {
+                    var type = "warning";
+                    var text = "Email not valid!";
+
+                    DevExpress.ui.notify(text, type, 3000);
+                }                
             });
         })
     );

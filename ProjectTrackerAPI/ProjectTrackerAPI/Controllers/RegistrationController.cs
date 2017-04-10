@@ -19,7 +19,7 @@ namespace ProjectTrackerAPI.Controllers
             if (checkUser == -1)
                 return Ok(user);
             else
-                return Content(HttpStatusCode.Ambiguous, "User is already in archive.");
+                return Content(HttpStatusCode.Ambiguous, "User already in archive.");
         }
     }
 }

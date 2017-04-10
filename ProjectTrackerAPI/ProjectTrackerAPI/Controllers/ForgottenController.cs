@@ -15,7 +15,7 @@ namespace ProjectTrackerAPI.Controllers
             long retrieveUser = UserLogic.RetrieveUser(user);
 
             if (retrieveUser == 0)
-                return Content(HttpStatusCode.Ambiguous, "User does not exists in the database.");
+                return Content(HttpStatusCode.Ambiguous, "User does not exists in archive.");
             else
                 return Ok(user);
         }
