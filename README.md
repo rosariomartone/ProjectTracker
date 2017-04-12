@@ -6,7 +6,7 @@ Requirements
 
 Source compiling erros:
 You could receive errors once downloaded the solution on your machine. The error for me was due to dlls not found.
-I have managed this issue unistalling them in the following order and then reinstalling in the opposite:
+I have managed this issue unistalling (Nuget Manager) them in the following order and then reinstalling in the opposite:
 
 - Microsoft.AspNet.Mvc
 - Microsoft.AspNet.WebPages
