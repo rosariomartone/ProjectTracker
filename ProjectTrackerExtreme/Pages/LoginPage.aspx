@@ -33,7 +33,6 @@
         }
 
         function validate() {
-            $("#result").text("");
             var email = $("#txtUsername").val();
 
             if (!validateEmail(email)) 

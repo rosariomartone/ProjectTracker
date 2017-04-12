@@ -99,6 +99,26 @@
     </div>
 </div>
 <script>
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function validate() {
+        var email = $("#txtEmail").val();
+
+        if (!validateEmail(email)) {
+            var type = "error";
+            var text = "Email non valid!";
+
+            DevExpress.ui.notify(text, type, 3000);
+
+            return true;
+        }
+        else
+            return true;
+    }
+
     $(document).ready(
         $(function() {
             $('.required-icon').tooltip({
@@ -109,39 +129,42 @@
             $('#btnRetrieve').click(function () {
                 if ($('#txtEmail').val() != "")
                 {
-                    var apiToken = null;
-                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                    if (validate())
+                    {
+                        var apiToken = null;
+                        var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                    $.ajax({
-                        url: url + "/api/data/forgotten",
-                        type: "POST",
-                        data: {
-                            email: $('#txtEmail').val()
-                        },
-                        success: function (data) {
-                            var type = "info";
-                            var text = "Your credentials have been sent to " + $('#txtEmail').val();
+                        $.ajax({
+                            url: url + "/api/data/forgotten",
+                            type: "POST",
+                            data: {
+                                email: $('#txtEmail').val()
+                            },
+                            success: function (data) {
+                                var type = "info";
+                                var text = "Your credentials have been sent to " + $('#txtEmail').val();
 
-                            DevExpress.ui.notify(text, type, 3000);
-                        },
-                        failure: function (response) {
-                            var type = "error";
-                            var text = response.responseText;
+                                DevExpress.ui.notify(text, type, 3000);
+                            },
+                            failure: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
 
-                            DevExpress.ui.notify(text, type, 3000);
-                        },
-                        error: function (response) {
-                            var type = "error";
-                            var text = response.responseText;
+                                DevExpress.ui.notify(text, type, 3000);
+                            },
+                            error: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
 
-                            DevExpress.ui.notify(text, type, 3000);
-                        }
-                    });
+                                DevExpress.ui.notify(text, type, 3000);
+                            }
+                        });
+                    }
                 }
                 else
                 {
                     var type = "warning";
-                    var text = "Email not valid!";
+                    var text = "Required fields not set!";
 
                     DevExpress.ui.notify(text, type, 3000);
                 }                
