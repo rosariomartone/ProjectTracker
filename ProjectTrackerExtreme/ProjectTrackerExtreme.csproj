@@ -128,6 +128,7 @@
     <Content Include="Pages\LoginPage.aspx" />
     <Content Include="Pages\Opportunities.aspx" />
     <Content Include="Pages\RegistrationPage.aspx" />
+    <Content Include="Pages\Settings.aspx" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -192,6 +193,7 @@
     <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UserControls\SettingsUser.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -253,6 +255,13 @@
     <Compile Include="Pages\RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\ForgottenPassword.ascx.cs">
       <DependentUpon>ForgottenPassword.ascx</DependentUpon>
@@ -267,6 +276,13 @@
     </Compile>
     <Compile Include="UserControls\RegistrationForm.ascx.designer.cs">
       <DependentUpon>RegistrationForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsUser.ascx.cs">
+      <DependentUpon>SettingsUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\SettingsUser.ascx.designer.cs">
+      <DependentUpon>SettingsUser.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -291,7 +307,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51604</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

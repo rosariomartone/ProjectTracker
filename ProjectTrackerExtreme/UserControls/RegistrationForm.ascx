@@ -126,7 +126,7 @@
 
                 <div class="row">
 			        <div class="col-xs-6 col-sm-6 col-md-6">
-				        <input id="btnRegister" name="btnRegister" type="button" class="btn btn-lg btn-primary btn-block" value="Register">
+				        <input id="btnRegister" name="btnRegister" type="button" class="btn btn-lg btn-primary btn-block" value="Sign Up">
 			        </div>
 		        </div>
         

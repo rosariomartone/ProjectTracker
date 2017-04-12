@@ -112,16 +112,16 @@
                                                         NavMenu.GetItemByName('btnLogin').SetVisible(true);
                                                         NavMenu.GetItemByName('btnSignUp').SetVisible(true);
                                                         NavMenu.GetItemByName('btnLogout').SetVisible(false);
-                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(false);
                                                         NavMenu.GetItemByName('btnSettings').SetVisible(false);
+                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(false);
                                                     }
                                                     else
                                                     {
                                                         NavMenu.GetItemByName('btnLogin').SetVisible(false);
                                                         NavMenu.GetItemByName('btnSignUp').SetVisible(false);
                                                         NavMenu.GetItemByName('btnLogout').SetVisible(true);
-                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(true);
                                                         NavMenu.GetItemByName('btnSettings').SetVisible(true);
+                                                        NavMenu.GetItemByName('btnOpportunities').SetVisible(true);
                                                     }
                                                 }" ItemClick="function(s, e) { MenuItemClick(e); }" />
                                             <ItemStyle Paddings-PaddingLeft="22" Paddings-PaddingRight="22" />
@@ -129,8 +129,8 @@
                                                 <dx:MenuItem Text="HOME" NavigateUrl="~/Pages/Home.aspx" />
                                                 <dx:MenuItem Name="btnLogin" Text="Sign In" NavigateUrl="~/Pages/LoginPage.aspx" />
                                                 <dx:MenuItem Name="btnSignUp" Text="Sign Up" NavigateUrl="Pages/RegistrationPage.aspx" />
-                                                <dx:MenuItem Name="btnOpportunities" Text="Opportunities" NavigateUrl="~/Pages/Opportunities.aspx" />
                                                 <dx:MenuItem Name="btnSettings" Text="Settings" NavigateUrl="~/Pages/Settings.aspx" />
+                                                <dx:MenuItem Name="btnOpportunities" Text="Opportunities" NavigateUrl="~/Pages/Opportunities.aspx" />
                                                 <dx:MenuItem Name="btnLogout" Text="Logout" NavigateUrl="#" />
                                             </Items>
                                         </dx:ASPxMenu>
