@@ -119,4 +119,12 @@
         </div>
     </section>
 </div>
+    <script>
+        $(document).ready(
+           function () 
+           {
+               localStorage.removeItem('ProjectTracker_Token');
+           }
+        ); 
+    </script>
 </asp:Content>
