@@ -1,15 +1,15 @@
 ProjectTracker
 This solution contains the follwoing projects:
-- ProjectTrackerAPI
+- ProjectTrackerAPI (Web API deployable)
 - ProjectTrackerBusinessLogic
 - ProjectTrackerDataAccess
 - ProjectTrackerEntities
 - ProjectTrackerEnum
-- ProjectTrackerExtreme
+- ProjectTrackerExtreme (Web application deployable)
 - ProjectTrackerFactory
 - ProjectTrackerUtilities
 
-Database is SQL Server, you can find a bak in the main folder after download the zip.
+Database is SQL Server, you can find a bak file in the main folder after download the zip.
 
 Requirements
 
@@ -35,6 +35,9 @@ I have managed this issue unistalling (Nuget Manager) them in the following orde
 - Microsoft.AspNet.WebApi.WebHost
 - Microsoft.AspNet.WebApi.Client
 
-Any suggestion or help is appreciated.
+Initial Settings.
+You will need to change the connection string in the web.config of ProjectTrackerAPI and the API URL property in ProjectTrackerExtreme.
+
+Any suggestion or help will be appreciated.
 
 Thanks!
