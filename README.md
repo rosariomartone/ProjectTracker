@@ -1,4 +1,15 @@
-ProjectTracker-library
+ProjectTracker
+This solution contains the follwoing projects:
+- ProjectTrackerAPI
+- ProjectTrackerBusinessLogic
+- ProjectTrackerDataAccess
+- ProjectTrackerEntities
+- ProjectTrackerEnum
+- ProjectTrackerExtreme
+- ProjectTrackerFactory
+- ProjectTrackerUtilities
+
+Database is SQL Server, you can find a bak in the main folder after download the zip.
 
 Requirements
 
@@ -23,3 +34,7 @@ I have managed this issue unistalling (Nuget Manager) them in the following orde
 - Microsoft.AspNet.WebApi.Core
 - Microsoft.AspNet.WebApi.WebHost
 - Microsoft.AspNet.WebApi.Client
+
+Any suggestion or help is appreciated.
+
+Thanks!
