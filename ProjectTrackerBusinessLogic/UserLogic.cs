@@ -1,5 +1,6 @@
 ﻿using ProjectTrackerEntities;
 using ProjectTrackerDataAccess;
+using System.Collections.Generic;
 
 namespace ProjectTrackerBusinessLogic
 {
@@ -10,6 +11,13 @@ namespace ProjectTrackerBusinessLogic
             UserDataAccess u = new UserDataAccess();
 
             return u.GetUser(username, password);
+        }
+
+        public static List<BaseUser> GetUsers()
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.GetUsers();
         }
 
         public static long RegisterNewUser(ClientUser user)

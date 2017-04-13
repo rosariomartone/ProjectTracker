@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using ProjectTrackerFactory;
+using System.Collections.Generic;
 
 namespace ProjectTrackerDataAccess
 {
@@ -49,6 +50,44 @@ namespace ProjectTrackerDataAccess
             }
 
             return user;
+        }
+
+        public List<BaseUser> GetUsers()
+        {
+            List<BaseUser> users = new List<BaseUser>();
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_GetUsers"
+                };
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                {
+                    Int64 roleInt = reader.GetInt64(4);
+                    UserTypeDataAccess ut = new UserTypeDataAccess();
+                    Role role = ut.GetRoleById(roleInt);
+                    ClientUser user = new ClientUser();
+                    user.Id = reader.GetInt64(0);
+                    user.Firstname = reader.GetString(1);
+                    user.Surname = reader.GetString(2);
+                    user.Email = reader.GetString(3);
+                    user.Username = reader.GetString(6);
+                    user.IsActive = reader.GetString(7);
+                    user.Role = role;
+
+                    users.Add(user);
+                }
+            }
+
+            return users;
         }
 
         public long RegisterNewUser(ClientUser user)

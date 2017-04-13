@@ -17,5 +17,7 @@ namespace ProjectTrackerEntities
         public string Email { get; set; }
 
         public Role Role { get; set; }
+
+        public String IsActive { get; set; }
     }
 }

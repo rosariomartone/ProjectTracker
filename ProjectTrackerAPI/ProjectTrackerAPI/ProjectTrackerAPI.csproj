@@ -147,6 +147,7 @@
     <Compile Include="Controllers\ForgottenController.cs" />
     <Compile Include="Controllers\OpportunitiesController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="OAuth\AuthorizeAttributecs.cs" />
     <Compile Include="Controllers\ProjectTrackerController.cs" />
     <Compile Include="Global.asax.cs">
