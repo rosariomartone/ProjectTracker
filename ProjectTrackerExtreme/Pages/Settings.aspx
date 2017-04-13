@@ -42,108 +42,109 @@
                 ];
 
         $("#longtabs > .tabs-container").dxTabs({
-            dataSource: longtabs
-        });
+            dataSource: longtabs,
+            onItemClick: function (e) {
+                if (e.itemData.text == "Users")
+                {
+                    var opportunities = null;
+                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-        $(document).ready(
-           function () {
-               var opportunities = null;
-               var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
-
-               if (localStorage.getItem('ProjectTracker_Token') == null)
-                   document.location.href = "LoginPage.aspx";
-               else
-               {
-                   var apiToken = localStorage.getItem('ProjectTracker_Token');
+                    if (localStorage.getItem('ProjectTracker_Token') == null)
+                        document.location.href = "LoginPage.aspx";
+                    else
+                    {
+                        var apiToken = localStorage.getItem('ProjectTracker_Token');
                    
-                   $.ajax({
-                       url: url + "/api/data/users",
-                       type: "GET",
-                       headers: {
-                           'Authorization': "bearer " + apiToken,
-                       },
-                       success: function (data) {
-                           opportunities = data;
+                        $.ajax({
+                            url: url + "/api/data/users",
+                            type: "GET",
+                            headers: {
+                                'Authorization': "bearer " + apiToken,
+                            },
+                            success: function (data) {
+                                opportunities = data;
 
-                           $("#usersGridContainer").dxDataGrid({
-                               dataSource: opportunities,
-                               columns: [
-                                   { dataField: 'Id', width: 50 },
-                                   { dataField: 'Firstname' },
-                                   { dataField: 'Surname' },
-                                   { dataField: 'Username' },
-                                   { dataField: 'Email' },
-                                   { dataField: 'IsActive' }                              
-                               ],
-                               selection: {
-                                   mode: "multiple"
-                               },
-                               "export": {
-                                   enabled: true,
-                                   fileName: "Users",
-                                   allowExportSelectedData: true
-                               },
-                               columnChooser: {
-                                   enabled: true,
-                                   mode: "select"
-                               },
-                               showBorders: true,
-                               allowColumnReordering: true,
-                               rowAlternationEnabled: true,
-                               onRowPrepared: function (e) {
-                                   if (e.rowType == 'data') {
-                                       e.rowElement[0].addEventListener("mouseover", function () {
-                                           e.rowElement.find("td").css('background', '#ffdb71');
-                                           e.rowElement.css("transition", "background-color 0.5s");
-                                       });
-                                       e.rowElement[0].addEventListener("mouseleave", function () {
-                                           e.rowElement.find("td").css('background', "");
-                                       });
-                                   }
-                               },
-                               wordWrapEnabled: true,
-                               loadPanel: {
-                                   enabled: true
-                               },
-                               editing: {
-                                   allowAdding: false,
-                                   allowUpdating: false,
-                                   mode: "batch"
-                               },
-                               sorting: { mode: 'multiple' },
-                               pager: {
-                                   allowedPageSizes: [10, 20, 50],
-                                   showInfo: true,
-                                   showNavigationButtons: true,
-                                   showPageSizeSelector: true,
-                                   visible: true
-                               },
-                               paging: { pageSize: 10 },
-                               filterRow: { visible: true },
-                               searchPanel: { visible: true },
-                               selection: { mode: 'multiple' },
-                               hoverStateEnabled: true
-                           });
-                       },
-                       failure: function (response) {
-                           var type = "error";
-                           var text = response.responseText;
+                                $("#usersGridContainer").dxDataGrid({
+                                    dataSource: opportunities,
+                                    columns: [
+                                        { dataField: 'Id', width: 50 },
+                                        { dataField: 'Firstname' },
+                                        { dataField: 'Surname' },
+                                        { dataField: 'Username' },
+                                        { dataField: 'Email' },
+                                        { dataField: 'IsActive' }                              
+                                    ],
+                                    selection: {
+                                        mode: "multiple"
+                                    },
+                                    "export": {
+                                        enabled: true,
+                                        fileName: "Users",
+                                        allowExportSelectedData: true
+                                    },
+                                    columnChooser: {
+                                        enabled: true,
+                                        mode: "select"
+                                    },
+                                    showBorders: true,
+                                    allowColumnReordering: true,
+                                    rowAlternationEnabled: true,
+                                    onRowPrepared: function (e) {
+                                        if (e.rowType == 'data') {
+                                            e.rowElement[0].addEventListener("mouseover", function () {
+                                                e.rowElement.find("td").css('background', '#ffdb71');
+                                                e.rowElement.css("transition", "background-color 0.5s");
+                                            });
+                                            e.rowElement[0].addEventListener("mouseleave", function () {
+                                                e.rowElement.find("td").css('background', "");
+                                            });
+                                        }
+                                    },
+                                    wordWrapEnabled: true,
+                                    loadPanel: {
+                                        enabled: true
+                                    },
+                                    editing: {
+                                        allowAdding: false,
+                                        allowUpdating: false,
+                                        mode: "batch"
+                                    },
+                                    sorting: { mode: 'multiple' },
+                                    pager: {
+                                        allowedPageSizes: [10, 20, 50],
+                                        showInfo: true,
+                                        showNavigationButtons: true,
+                                        showPageSizeSelector: true,
+                                        visible: true
+                                    },
+                                    paging: { pageSize: 10 },
+                                    filterRow: { visible: true },
+                                    searchPanel: { visible: true },
+                                    selection: { mode: 'multiple' },
+                                    hoverStateEnabled: true
+                                });
+                            },
+                            failure: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
 
-                           DevExpress.ui.notify(text, type, 3000);
+                                DevExpress.ui.notify(text, type, 3000);
 
-                           localStorage.removeItem('ProjectTracker_Token');
-                           document.location.href = "LoginPage.aspx";
-                       },
-                       error: function (response) {
-                           var type = "error";
-                           var text = response.responseText;
+                                localStorage.removeItem('ProjectTracker_Token');
+                                document.location.href = "LoginPage.aspx";
+                            },
+                            error: function (response) {
+                                var type = "error";
+                                var text = response.responseText;
 
-                           DevExpress.ui.notify(text, type, 3000);
-                           localStorage.removeItem('ProjectTracker_Token');
-                           document.location.href = "LoginPage.aspx";
-                       }
-                   });
-               }
-        }); 
+                                DevExpress.ui.notify(text, type, 3000);
+                                localStorage.removeItem('ProjectTracker_Token');
+                                document.location.href = "LoginPage.aspx";
+                            }
+                        });
+                    }
+                }
+            }
+        });
     </script>
 </asp:Content>
