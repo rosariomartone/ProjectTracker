@@ -100,6 +100,23 @@
                                             });
                                         }
                                     },
+                                    //onCellPrepared: function(options) {
+                                    //    var fieldData = options.value,
+                                    //        fieldHtml = "";
+                                    //    if(fieldData && fieldData.value) {
+                                    //        if(fieldData.diff) {
+                                    //            options.cellElement.addClass((fieldData.diff > 0) ? "inc" : "dec");
+                                    //            fieldHtml += "<span class='current-value'>" +
+                                    //                Globalize.formatCurrency(fieldData.value, "USD") +
+                                    //                "</span> <span class='diff'>" +
+                                    //                Math.abs(fieldData.diff).toFixed(2) +
+                                    //                "  </span>";
+                                    //        } else {
+                                    //            fieldHtml = fieldData.value;
+                                    //        }
+                                    //        options.cellElement.html(fieldHtml);
+                                    //    }
+                                    //},
                                     wordWrapEnabled: true,
                                     loadPanel: {
                                         enabled: true

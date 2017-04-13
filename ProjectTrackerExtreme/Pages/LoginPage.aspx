@@ -16,10 +16,10 @@
 				        <hr class="colorgraph">
 				        <div class="row">
 					        <div class="col-xs-6 col-sm-6 col-md-6">
-                                <input id="btnLogin" name="btnLogin" type="button" class="btn btn-lg btn-success btn-block" value="Sign In">
+						        <a href="RegistrationPage.aspx" class="btn btn-lg btn-primary btn-block">Register</a>
 					        </div>
 					        <div class="col-xs-6 col-sm-6 col-md-6">
-						        <a href="RegistrationPage.aspx" class="btn btn-lg btn-primary btn-block">Register</a>
+                                <input id="btnLogin" name="btnLogin" type="button" class="btn btn-lg btn-success btn-block" value="Sign In">
 					        </div>
 				        </div>
 			        </fieldset>		        
