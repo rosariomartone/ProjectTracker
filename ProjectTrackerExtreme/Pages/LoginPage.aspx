@@ -72,12 +72,16 @@
                                 document.location.href = "Opportunities.aspx";
                             },
                             failure: function (response) {
+                                $(this).prop('disabled', false);
+
                                 var type = "error";
                                 var text = response.responseText;
 
                                 DevExpress.ui.notify(text, type, 3000);
                             },
                             error: function (response) {
+                                $(this).prop('disabled', false);
+
                                 var type = "error";
                                 var text = response.responseText;
 
