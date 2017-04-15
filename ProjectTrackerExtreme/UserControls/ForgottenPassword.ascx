@@ -141,6 +141,8 @@
                                 email: $('#txtEmail').val()
                             },
                             success: function (data) {
+                                $('#btnRetrieve').prop('disabled', true);
+
                                 var type = "info";
                                 var text = "Your credentials have been sent to " + $('#txtEmail').val();
 

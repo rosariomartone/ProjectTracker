@@ -182,6 +182,8 @@
                                     password: $('#txtPassword').val()
                                 },
                                 success: function (data) {
+                                    $('#btnRegister').prop('disabled', true);
+
                                     var type = "info";
                                     var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
 

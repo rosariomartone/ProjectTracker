@@ -54,6 +54,8 @@
                 {
                     if ($('#txtUsername').val() != "" && $('#txtPassword').val() != "")
                     {
+                        $(this).prop('disabled', true);
+
                         var apiToken = null;
                         var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
