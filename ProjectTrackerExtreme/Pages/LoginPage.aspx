@@ -54,7 +54,7 @@
                 {
                     if ($('#txtUsername').val() != "" && $('#txtPassword').val() != "")
                     {
-                        $(this).prop('disabled', true);
+                        $('#btnLogin').prop('disabled', true);
 
                         var apiToken = null;
                         var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
@@ -72,7 +72,7 @@
                                 document.location.href = "Opportunities.aspx";
                             },
                             failure: function (response) {
-                                $(this).prop('disabled', false);
+                                $('#btnLogin').prop('disabled', false);
 
                                 var type = "error";
                                 var text = response.responseText;
@@ -80,7 +80,7 @@
                                 DevExpress.ui.notify(text, type, 3000);
                             },
                             error: function (response) {
-                                $(this).prop('disabled', false);
+                                $('#btnLogin').prop('disabled', false);
 
                                 var type = "error";
                                 var text = response.responseText;
