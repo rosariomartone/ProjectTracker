@@ -122,6 +122,15 @@
                     </div>
                 </div>   
 
+                <br />
+
+                <div class="required-field-block">
+                    <input type="password" name="txtConfirmPassword" id="txtConfirmPassword" placeholder="Confirm your password" class="form-control">
+                    <div class="required-icon">
+                        <div class="text">*</div>
+                    </div>
+                </div>  
+
                 <hr class="colorgraph">
 
                 <div class="row">
@@ -165,48 +174,57 @@
             $('#btnRegister').click(function () {
                 if (validate())
                 {
-                    if ($('#txtFirstname').val() != "" && $('#txtSurname').val() != "" && $('#txtEmailConfirm').val() != "" && $('#txtEmail').val() != "" && $('#txtPassword').val() != "")
+                    if ($('#txtFirstname').val() != "" && $('#txtSurname').val() != "" && $('#txtEmailConfirm').val() != "" && $('#txtEmail').val() != "" && $('#txtPassword').val() != "" && $('#txtConfirmPassword').val() != "")
                     {
-                        if ($('#txtEmailConfirm').val() == $('#txtEmail').val())
+                        if ($('#txtPassword').val() == $('#txtConfirmPassword').val())
                         {
-                            var apiToken = null;
-                            var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                            if ($('#txtEmailConfirm').val() == $('#txtEmail').val())
+                            {
+                                var apiToken = null;
+                                var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                            $.ajax({
-                                url: url + "/api/data/registration",
-                                type: "POST",
-                                data: {
-                                    firstname: $('#txtFirstname').val(),
-                                    surname: $('#txtSurname').val(),
-                                    email: $('#txtEmail').val(),
-                                    password: $('#txtPassword').val()
-                                },
-                                success: function (data) {
-                                    $('#btnRegister').prop('disabled', true);
+                                $.ajax({
+                                    url: url + "/api/data/registration",
+                                    type: "POST",
+                                    data: {
+                                        firstname: $('#txtFirstname').val(),
+                                        surname: $('#txtSurname').val(),
+                                        email: $('#txtEmail').val(),
+                                        password: $('#txtPassword').val()
+                                    },
+                                    success: function (data) {
+                                        $('#btnRegister').prop('disabled', true);
 
-                                    var type = "info";
-                                    var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
+                                        var type = "info";
+                                        var text = "Your data have been sent and a confirmation email has been sent to " + $('#txtEmail').val();
 
-                                    DevExpress.ui.notify(text, type, 3000);
-                                },
-                                failure: function (response) {
-                                    var type = "error";
-                                    var text = response.responseText;
+                                        DevExpress.ui.notify(text, type, 3000);
+                                    },
+                                    failure: function (response) {
+                                        var type = "error";
+                                        var text = response.responseText;
 
-                                    DevExpress.ui.notify(text, type, 3000);
-                                },
-                                error: function (response) {
-                                    var type = "error";
-                                    var text = response.responseText;
+                                        DevExpress.ui.notify(text, type, 3000);
+                                    },
+                                    error: function (response) {
+                                        var type = "error";
+                                        var text = response.responseText;
 
-                                    DevExpress.ui.notify(text, type, 3000);
-                                }
-                            });
+                                        DevExpress.ui.notify(text, type, 3000);
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                var type = "warning";
+                                var text = "Email does not match with confirm Email!";
+
+                                DevExpress.ui.notify(text, type, 3000);
+                            }
                         }
-                        else
-                        {
+                        else {
                             var type = "warning";
-                            var text = "Email does not match with confirm Email!";
+                            var text = "Password does not match with confirm Password!";
 
                             DevExpress.ui.notify(text, type, 3000);
                         }
