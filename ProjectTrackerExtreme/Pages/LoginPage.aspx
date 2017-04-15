@@ -1,10 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout.master" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="ProjectTrackerExtreme.Pages.LoginPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
-    <style type="text/css">
-        input.loading {
-            background: url(http://www.xiconeditor.com/image/icons/loading.gif) no-repeat right center;
-        }
-    </style>
     <div class="container">
             <div class="row" style="margin-top:60px">
                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">    	        
@@ -62,8 +57,6 @@
                         var apiToken = null;
                         var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
-                        $('#btnLogin').addClass('loading');
-
                         $.ajax({
                             url: url + "/token",
                             type: "POST",
@@ -89,7 +82,6 @@
                                 DevExpress.ui.notify(text, type, 3000);
                             }
                         });
-                        $('#btnLogin').removeClass('loading');
                     }
                     else
                     {

@@ -18,6 +18,6 @@ namespace ProjectTrackerEntities
 
         public Role Role { get; set; }
 
-        public String IsActive { get; set; }
+        public string IsActive { get; set; }
     }
 }
