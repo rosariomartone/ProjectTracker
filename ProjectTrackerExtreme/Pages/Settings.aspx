@@ -176,6 +176,12 @@
                                             showPageSizeSelector: true,
                                             visible: true
                                         },
+                                        groupPanel: {
+                                            visible: true
+                                        },
+                                        grouping: {
+                                            autoExpandAll: true,
+                                        },
                                         paging: { pageSize: 10 },
                                         filterRow: { visible: true },
                                         searchPanel: { visible: true },

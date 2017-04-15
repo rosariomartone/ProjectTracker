@@ -84,6 +84,12 @@
                                    mode: "batch"
                                },
                                sorting: { mode: 'multiple' },
+                               groupPanel: {
+                                   visible: true
+                               },
+                               grouping: {
+                                   autoExpandAll: true,
+                               },
                                pager: {
                                    allowedPageSizes: [10, 20, 50],
                                    showInfo: true,

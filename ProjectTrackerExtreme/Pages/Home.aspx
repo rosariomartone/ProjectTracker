@@ -55,7 +55,7 @@
         </div>
     </section>
     <section>
-        <div class="row marginTop20">
+        <%--<div class="row marginTop20">
             <div class="col-md-12">
                 <h3>Our Customers</h3>
                 <p>No amount of marketing hype and hyperbole can mask a company's ability to deliver products that meet and exceed customer expectations. The following is a brief list of comments sent to us from our end-users - developers such as yourself who don't have time and money to waste - developers who need to get down to business and address client needs in the shortest possible.</p>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
     </section>
 </div>
     <script>
