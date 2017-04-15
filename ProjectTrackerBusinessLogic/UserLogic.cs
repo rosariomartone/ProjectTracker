@@ -33,5 +33,12 @@ namespace ProjectTrackerBusinessLogic
 
             return u.RetrieveUser(user);
         }
+
+        public static int SaveUserSettings(BaseUser user)
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.SaveUserSettings(user);
+        }
     }
 }

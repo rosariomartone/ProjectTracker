@@ -151,5 +151,33 @@ namespace ProjectTrackerDataAccess
 
             return retrieveUser;
         }
+
+        public int SaveUserSettings(BaseUser user)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+            int rowAffected = 0;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_SaveUserSettings"
+                };
+
+                var parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
+                var parameterIsActive = new SqlParameter("@isActive", SqlDbType.VarChar) { Value = user.IsActive };
+                command.Parameters.Add(parameterIdUser);
+                command.Parameters.Add(parameterIsActive);
+
+                connection.Open();
+                rowAffected = command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            return rowAffected;
+        }
     }
 }

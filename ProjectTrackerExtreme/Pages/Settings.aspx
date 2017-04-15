@@ -44,9 +44,10 @@
         $("#longtabs > .tabs-container").dxTabs({
             dataSource: longtabs,
             onItemClick: function (e) {
+                //Users
                 if (e.itemData.text == "Users")
                 {
-                    var opportunities = null;
+                    var users = null;
                     var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
                     if (localStorage.getItem('ProjectTracker_Token') == null)
@@ -62,17 +63,17 @@
                                 'Authorization': "bearer " + apiToken,
                             },
                             success: function (data) {
-                                opportunities = data;
+                                users = data;
 
                                 $("#usersGridContainer").dxDataGrid({
-                                    dataSource: opportunities,
+                                    dataSource: users,
                                     columns: [
-                                        { dataField: 'Id', width: 50 },
-                                        { dataField: 'Firstname' },
-                                        { dataField: 'Surname' },
-                                        { dataField: 'Username' },
-                                        { dataField: 'Email' },
-                                        { dataField: 'IsActive' }                              
+                                        { dataField: 'Id', width: 50, dataType: 'number', allowEditing: false },
+                                        { dataField: 'Firstname', dataType: 'string', allowEditing: false },
+                                        { dataField: 'Surname', dataType: 'string', allowEditing: false },
+                                        { dataField: 'Username', dataType: 'string', allowEditing: false },
+                                        { dataField: 'Email', dataType: 'string', allowEditing: false },
+                                        { dataField: 'IsActive', dataType: 'boolean', caption: 'Active' }
                                     ],
                                     selection: {
                                         mode: "multiple"
@@ -100,30 +101,52 @@
                                             });
                                         }
                                     },
-                                    //onCellPrepared: function(options) {
-                                    //    var fieldData = options.value,
-                                    //        fieldHtml = "";
-                                    //    if(fieldData && fieldData.value) {
-                                    //        if(fieldData.diff) {
-                                    //            options.cellElement.addClass((fieldData.diff > 0) ? "inc" : "dec");
-                                    //            fieldHtml += "<span class='current-value'>" +
-                                    //                Globalize.formatCurrency(fieldData.value, "USD") +
-                                    //                "</span> <span class='diff'>" +
-                                    //                Math.abs(fieldData.diff).toFixed(2) +
-                                    //                "  </span>";
-                                    //        } else {
-                                    //            fieldHtml = fieldData.value;
-                                    //        }
-                                    //        options.cellElement.html(fieldHtml);
-                                    //    }
-                                    //},
+                                    onRowUpdated: function (e) {
+                                        var dataGrid = JSON.stringify(e.key);
+                                        var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                                        var apiToken = localStorage.getItem('ProjectTracker_Token');
+                                        var isActive = "0";
+
+                                        if (e.key["IsActive"] == true)
+                                            isActive = "1";
+
+                                        $.ajax({
+                                            url: url + "/api/data/usersSettings",
+                                            type: "POST",
+                                            headers: {
+                                                'Authorization': "bearer " + apiToken,
+                                            },
+                                            data: {
+                                                Id: e.key["Id"],
+                                                isActive: isActive
+                                            },
+                                            success: function (data) {
+                                                var type = "success";
+                                                var text = response.responseText;
+
+                                                DevExpress.ui.notify(text, type, 3000);
+                                            },
+                                            failure: function (response) {
+                                                var type = "error";
+                                                var text = response.responseText;
+
+                                                DevExpress.ui.notify(text, type, 3000);
+                                            },
+                                            error: function (response) {
+                                                var type = "error";
+                                                var text = response.responseText;
+
+                                                DevExpress.ui.notify(text, type, 3000);
+                                            }
+                                        });
+                                    },
                                     wordWrapEnabled: true,
                                     loadPanel: {
                                         enabled: true
                                     },
                                     editing: {
                                         allowAdding: false,
-                                        allowUpdating: false,
+                                        allowUpdating: true,
                                         mode: "batch"
                                     },
                                     sorting: { mode: 'multiple' },
@@ -158,9 +181,10 @@
                                 localStorage.removeItem('ProjectTracker_Token');
                                 document.location.href = "LoginPage.aspx";
                             }
-                        });
+                        });                        
                     }
                 }
+                //Labels
             }
         });
     </script>
