@@ -37,6 +37,9 @@
 
     <script>
         var longtabs = [
+            { text: "Clients", icon: "group" },
+            { text: "Stores", icon: "box" },
+            { text: "Departments", icon: "download" },
             { text: "Users", icon: "user" },
             { text: "Labels", icon: "comment" }
                 ];
@@ -76,23 +79,7 @@
                                             { dataField: 'Surname', dataType: 'string', allowEditing: false },
                                             { dataField: 'Username', dataType: 'string', allowEditing: false },
                                             { dataField: 'Email', dataType: 'string', allowEditing: false },
-                                            {
-                                                dataField: 'IsActive', dataType: 'boolean', caption: 'Active'//,
-                                                                        //cellTemplate: function (cellElement, cellInfo) {
-                                                                        //    if (cellInfo.text == "True")
-                                                                        //    {
-                                                                        //        $("<div>").dxSwitch({
-                                                                        //            value: true
-                                                                        //        }).appendTo(cellElement);
-                                                                        //    }
-                                                                        //    else
-                                                                        //    {
-                                                                        //        $("<div>").dxSwitch({
-                                                                        //            value: false
-                                                                        //        }).appendTo(cellElement);
-                                                                        //    }
-                                                                        //}
-                                            }
+                                            { dataField: 'IsActive', width: 100, dataType: 'boolean', caption: 'Active' }
                                         ],
                                         selection: {
                                             mode: "multiple"

@@ -19,5 +19,9 @@ namespace ProjectTrackerEntities
         public Role Role { get; set; }
 
         public string IsActive { get; set; }
+
+        public Store Store { get; set; }
+
+        public Department Department { get; set; }
     }
 }
