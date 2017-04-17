@@ -43,6 +43,7 @@
     <Compile Include="BaseUser.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientUser.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="IBaseUser.cs" />
     <Compile Include="MenuBar.cs" />

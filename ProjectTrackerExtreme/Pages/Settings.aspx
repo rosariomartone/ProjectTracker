@@ -60,7 +60,7 @@
                            else
                                localStorage.setItem('ProjectTracker_Token_Role', '2');
 
-                                $.ajax({
+                            $.ajax({
                                     url: url + "/api/data/menuvoices/" + localStorage.getItem("ProjectTracker_Token_Role"),
                                     type: "GET",
                                     headers: {
