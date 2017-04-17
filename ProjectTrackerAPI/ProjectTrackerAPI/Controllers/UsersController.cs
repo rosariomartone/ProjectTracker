@@ -46,7 +46,7 @@ namespace ProjectTrackerAPI.Controllers
             var roles = identity.Claims.Where(c => c.Type == ClaimTypes.Role)
                 .Select(c => c.Value);
 
-            return Ok(string.Join(",", roles.ToList()));
+            return Ok(RoleLogic.GetRoleByName(string.Join(",", roles.ToList())));
         }
     }
 }

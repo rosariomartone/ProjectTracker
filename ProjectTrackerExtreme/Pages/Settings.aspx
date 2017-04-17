@@ -55,10 +55,7 @@
                            'Authorization': "bearer " + apiToken,
                        },
                        success: function (data) {
-                           if(data == 'Admin')
-                               localStorage.setItem('ProjectTracker_Token_Role', '1');
-                           else
-                               localStorage.setItem('ProjectTracker_Token_Role', '2');
+                           localStorage.setItem('ProjectTracker_Token_Role', data);
 
                             $.ajax({
                                     url: url + "/api/data/menuvoices/" + localStorage.getItem("ProjectTracker_Token_Role"),

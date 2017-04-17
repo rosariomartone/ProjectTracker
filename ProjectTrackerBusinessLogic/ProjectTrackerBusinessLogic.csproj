@@ -43,6 +43,7 @@
     <Compile Include="MenuVoicesLogic.cs" />
     <Compile Include="OpportunityLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleLogic.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="UserTypeLogic.cs" />
   </ItemGroup>
