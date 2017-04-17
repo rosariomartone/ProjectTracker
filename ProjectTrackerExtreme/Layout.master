@@ -48,40 +48,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <script>
-            $(document).ready(
-                $('#btnLogin').click(function () {
-                    var apiToken = null;
-                    var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
-
-                    $.ajax({
-                        url: url + "/ProjectTracker/token",
-                        type: "POST",
-                        data : {
-                            username : $('#txtUsername').val(),
-                            password : $('#txtPassword').val(),
-                            grant_type : "password"
-                        },
-                        success: function (data) {
-                            localStorage.setItem("ProjectTracker_Token", data.access_token);
-                            document.location.href = "Opportunities.aspx";
-                        },
-                        failure: function (response) {
-                            var type = "error";
-                            var text = response.responseText;
-
-                            DevExpress.ui.notify(text, type, 600);
-                        },
-                        error: function (response) {
-                            var type = "error";
-                            var text = response.responseText;
-
-                            DevExpress.ui.notify(text, type, 600);
-                        }
-                    });
-                })
-            );
-        </script>
     <div class="wrapper">
         <header>
             <div class="container">

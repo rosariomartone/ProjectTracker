@@ -4,7 +4,9 @@ using ProjectTrackerBusinessLogic;
 using ProjectTrackerEntities;
 using System.Net;
 using System;
-using System.Collections.Generic;
+using System.Security.Claims;
+
+using System.Linq;
 
 namespace ProjectTrackerAPI.Controllers
 {
@@ -33,6 +35,18 @@ namespace ProjectTrackerAPI.Controllers
             {
                 return Content(HttpStatusCode.BadRequest, "Errors during User settings saving: " + ex.Message);
             }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/data/authenticate")]
+        public IHttpActionResult GetForAuthenticate()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var roles = identity.Claims.Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
+
+            return Ok(string.Join(",", roles.ToList()));
         }
     }
 }

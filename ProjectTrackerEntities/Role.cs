@@ -1,6 +1,7 @@
 ﻿using System;
 
 using ProjectTrackerEnum;
+using System.Collections.Generic;
 
 namespace ProjectTrackerEntities
 {
@@ -11,5 +12,7 @@ namespace ProjectTrackerEntities
         public string Name { get; set; }
 
         public UserEnumeration UserType { get; set; }
+
+        public List<MenuBarVoices> Menu { get; set; }
     }
 }

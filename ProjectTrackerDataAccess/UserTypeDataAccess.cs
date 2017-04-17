@@ -29,7 +29,8 @@ namespace ProjectTrackerDataAccess
 
                 connection.Open();
                 var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                while (reader.Read())
+
+                if (reader.Read())
                 {
                     role = new Role
                     {

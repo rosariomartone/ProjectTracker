@@ -37,7 +37,10 @@ namespace ProjectTrackerDataAccess
                 {
                     Int64 roleInt = reader.GetInt64(4);
                     UserTypeDataAccess ut = new UserTypeDataAccess();
+                    MenuVoicesDataAccess mt = new MenuVoicesDataAccess();
                     Role role = ut.GetRoleById(roleInt);
+                    List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(6));
+                    role.Menu = menu;
                     user = UserFactory.getUser(role);
                     user.Id = reader.GetInt64(0);
                     user.Firstname = reader.GetString(1);
@@ -73,7 +76,10 @@ namespace ProjectTrackerDataAccess
                 {
                     Int64 roleInt = reader.GetInt64(4);
                     UserTypeDataAccess ut = new UserTypeDataAccess();
+                    MenuVoicesDataAccess mt = new MenuVoicesDataAccess();
                     Role role = ut.GetRoleById(roleInt);
+                    List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(8));
+                    role.Menu = menu;
                     ClientUser user = new ClientUser();
                     user.Id = reader.GetInt64(0);
                     user.Firstname = reader.GetString(1);

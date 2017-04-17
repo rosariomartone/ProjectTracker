@@ -45,6 +45,8 @@
     <Compile Include="ClientUser.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="IBaseUser.cs" />
+    <Compile Include="MenuBar.cs" />
+    <Compile Include="MenuBarVoices.cs" />
     <Compile Include="Opportunity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProximaUser.cs" />
