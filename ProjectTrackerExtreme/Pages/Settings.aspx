@@ -34,6 +34,8 @@
         <br />
         <div id="usersGridContainer" style="height:70%; width:90%; margin: 0 auto">
         </div>
+        <%--<div id="btnNewUser" style="display:none;background-color:lightskyblue;letter-spacing:normal"></div>
+        <div id="popUserNew"></div>--%>
         <hr class="colorgraph">
     </div>
 
@@ -47,6 +49,32 @@
                function () {
                     var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
                    var apiToken = localStorage.getItem('ProjectTracker_Token');
+
+                   //$("#popUserNew").dxPopup({
+                   //    fullScreen: false,
+                   //    titleTemplate: function (titleElement) {
+                   //        titleElement.append("<h1>New User</h1>");
+                   //        var showButtonCheckBox = $("<div>");
+                   //    },
+                   //    contentTemplate: function (contentElement) {
+                   //        contentElement.append("<p>Please fill in all required fields.</p>");
+                   //        var hideButton = $("<div id='hideButton'>").dxButton({
+                   //            text: "Close",
+                   //            onClick: function () {
+                   //                $("#popUserNew").dxPopup("instance").hide();
+                   //            }
+                   //        });
+                   //        contentElement.append(hideButton);
+
+                   //    }
+                   //});
+
+                   //$("#btnNewUser").dxButton({
+                   //    text: 'New User',
+                   //    onClick: function () {
+                   //        $("#popUserNew").dxPopup("instance").show();
+                   //    }
+                   //});
 
                    $.ajax({
                        url: url + "/api/data/authenticate",
@@ -77,6 +105,8 @@
                                                     var users = null;
                                                     var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
+                                                    $("#btnNewUser").show();
+
                                                     if (localStorage.getItem('ProjectTracker_Token') == null)
                                                         document.location.href = "LoginPage.aspx";
                                                     else
@@ -91,8 +121,6 @@
                                                             },
                                                             success: function (data) {
                                                                 users = data;
-
-                                                                alert(roles);
 
                                                                 $("#usersGridContainer").dxDataGrid({
                                                                     dataSource: users,

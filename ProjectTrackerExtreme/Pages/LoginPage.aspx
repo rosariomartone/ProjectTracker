@@ -78,7 +78,7 @@
                                         'Authorization': "bearer " + data.access_token,
                                     },
                                     success: function (data) {
-                                        localStorage.setItem('ProjectTracker_Roles', data);
+                                        localStorage.setItem('ProjectTracker_Roles', JSON.stringify(data));
 
                                         document.location.href = "Opportunities.aspx";
                                     },
