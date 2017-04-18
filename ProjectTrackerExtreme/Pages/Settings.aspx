@@ -56,6 +56,8 @@
                        },
                        success: function (data) {
                            localStorage.setItem('ProjectTracker_Token_Role', data);
+                           //var roles = localStorage.getItem('ProjectTracker_Roles');
+                           var roles = [{ "RoleId": 1, "Name": "Admin", "UserType": 1, "Menu": null }, { "RoleId": 2, "Name": "User", "UserType": 2, "Menu": null }];
 
                             $.ajax({
                                     url: url + "/api/data/menuvoices/" + localStorage.getItem("ProjectTracker_Token_Role"),
@@ -89,10 +91,8 @@
                                                             },
                                                             success: function (data) {
                                                                 users = data;
-                                                                var roles = [
-                                                                    { RoleId: 1, Name: 'Admin' },
-                                                                    { RoleId: 2, Name: 'User' }
-                                                                ];
+
+                                                                alert(roles);
 
                                                                 $("#usersGridContainer").dxDataGrid({
                                                                     dataSource: users,
@@ -102,7 +102,7 @@
                                                                         { dataField: 'Surname', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Username', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Email', dataType: 'string', allowEditing: false },
-                                                                        { dataField: 'Role.RoleId', lookup: { dataSource: roles, valueExpr: 'RoleId', displayExpr: 'Name' } },
+                                                                        { dataField: 'Role.RoleId', caption: 'Role', lookup: { dataSource: roles, valueExpr: 'RoleId', displayExpr: 'Name' } },
                                                                         { dataField: 'IsActive', width: 100, dataType: 'boolean', caption: 'Active' }
                                                                     ],
                                                                     selection: {

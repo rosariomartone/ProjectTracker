@@ -13,5 +13,12 @@ namespace ProjectTrackerBusinessLogic
 
             return role.GetRoleByName(name);
         }
+
+        public static List<Role> GetRoles()
+        {
+            RoleDataAccess role = new RoleDataAccess();
+
+            return role.GetRoles();
+        }
     }
 }

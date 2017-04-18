@@ -40,6 +40,7 @@
             {
                 e.processOnServer = false;
                 localStorage.removeItem('ProjectTracker_Token');
+                localStorage.removeItem('ProjectTracker_Roles');
                 document.location.href = "LoginPage.aspx";
             }
         }

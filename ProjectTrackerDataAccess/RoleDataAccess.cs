@@ -39,5 +39,40 @@ namespace ProjectTrackerDataAccess
 
             return roleInt;
         }
+
+        public List<Role> GetRoles()
+        {
+            List<Role> roles = new List<Role>();
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_GetRoles"
+                };
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                {
+                    Role role = new Role();
+                    role.RoleId = reader.GetInt64(0);
+                    role.Name = reader.GetString(1);
+
+                    if (reader.GetInt32(2) == 1)
+                        role.UserType = ProjectTrackerEnum.UserEnumeration.ProximaUser;
+                    else
+                        role.UserType = ProjectTrackerEnum.UserEnumeration.ClientUser;
+
+                    roles.Add(role);
+                }
+            }
+
+            return roles;
+        }
     }
 }
