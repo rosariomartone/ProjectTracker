@@ -86,7 +86,7 @@ namespace ProjectTrackerDataAccess
                     user.Surname = reader.GetString(2);
                     user.Email = reader.GetString(3);
                     user.Username = reader.GetString(6);
-                    user.IsActive = reader.GetString(7);
+                    user.IsActive = bool.Parse(reader.GetString(7));
                     user.Role = role;
 
                     users.Add(user);
@@ -173,9 +173,37 @@ namespace ProjectTrackerDataAccess
                 };
 
                 var parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
+                var parameterRole = new SqlParameter("@role", SqlDbType.BigInt) { Value = user.Role.RoleId };
                 var parameterIsActive = new SqlParameter("@isActive", SqlDbType.VarChar) { Value = user.IsActive };
                 command.Parameters.Add(parameterIdUser);
+                command.Parameters.Add(parameterRole);
                 command.Parameters.Add(parameterIsActive);
+
+                connection.Open();
+                rowAffected = command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            return rowAffected;
+        }
+
+        public int SaveUserSettings_Delete(BaseUser user)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+            int rowAffected = 0;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_SaveUserSettings_Delete"
+                };
+
+                var parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
+                command.Parameters.Add(parameterIdUser);
 
                 connection.Open();
                 rowAffected = command.ExecuteNonQuery();

@@ -89,6 +89,10 @@
                                                             },
                                                             success: function (data) {
                                                                 users = data;
+                                                                var roles = [
+                                                                    { RoleId: 1, Name: 'Admin' },
+                                                                    { RoleId: 2, Name: 'User' }
+                                                                ];
 
                                                                 $("#usersGridContainer").dxDataGrid({
                                                                     dataSource: users,
@@ -98,6 +102,7 @@
                                                                         { dataField: 'Surname', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Username', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Email', dataType: 'string', allowEditing: false },
+                                                                        { dataField: 'Role.RoleId', lookup: { dataSource: roles, valueExpr: 'RoleId', displayExpr: 'Name' } },
                                                                         { dataField: 'IsActive', width: 100, dataType: 'boolean', caption: 'Active' }
                                                                     ],
                                                                     selection: {
@@ -135,6 +140,7 @@
                                                                         if (e.key["IsActive"] == true)
                                                                             isActive = "1";
 
+                                                                        
                                                                         $.ajax({
                                                                             url: url + "/api/data/usersSettings",
                                                                             type: "POST",
@@ -143,7 +149,42 @@
                                                                             },
                                                                             data: {
                                                                                 Id: e.key["Id"],
-                                                                                isActive: isActive
+                                                                                isActive: isActive,
+                                                                                Role: e.key["Role.RoleId"]
+                                                                            },
+                                                                            success: function (data) {
+                                                                                var type = "success";
+                                                                                var text = response.responseText;
+
+                                                                                DevExpress.ui.notify(text, type, 3000);
+                                                                            },
+                                                                            failure: function (response) {
+                                                                                var type = "error";
+                                                                                var text = response.responseText;
+
+                                                                                DevExpress.ui.notify(text, type, 3000);
+                                                                            },
+                                                                            error: function (response) {
+                                                                                var type = "error";
+                                                                                var text = response.responseText;
+
+                                                                                DevExpress.ui.notify(text, type, 3000);
+                                                                            }
+                                                                        });
+                                                                    },
+                                                                    onRowRemoved: function (e) {
+                                                                        var dataGrid = JSON.stringify(e.key);
+                                                                        var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
+                                                                        var apiToken = localStorage.getItem('ProjectTracker_Token');
+
+                                                                        $.ajax({
+                                                                            url: url + "/api/data/usersSettings_Delete",
+                                                                            type: "POST",
+                                                                            headers: {
+                                                                                'Authorization': "bearer " + apiToken,
+                                                                            },
+                                                                            data: {
+                                                                                Id: e.key["Id"]
                                                                             },
                                                                             success: function (data) {
                                                                                 var type = "success";
@@ -171,6 +212,7 @@
                                                                     },
                                                                     editing: {
                                                                         allowAdding: false,
+                                                                        allowDeleting: true,
                                                                         allowUpdating: true,
                                                                         mode: "batch"
                                                                     },

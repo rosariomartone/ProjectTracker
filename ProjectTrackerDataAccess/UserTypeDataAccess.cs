@@ -34,7 +34,7 @@ namespace ProjectTrackerDataAccess
                 {
                     role = new Role
                     {
-                        Id = int.Parse(reader["ID_Role"].ToString()),
+                        RoleId = int.Parse(reader["ID_Role"].ToString()),
                         Name = reader["name"].ToString(),
                         UserType = (UserEnumeration)int.Parse(reader["userType"].ToString())
                     };

@@ -7,7 +7,7 @@ namespace ProjectTrackerEntities
 {
     public class Role
     {
-        public Int64 Id { get; set; }
+        public Int64 RoleId { get; set; }
 
         public string Name { get; set; }
 

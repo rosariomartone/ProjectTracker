@@ -37,6 +37,23 @@ namespace ProjectTrackerAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("api/data/usersSettings_Delete")]
+        public IHttpActionResult SaveUserSettings_Delete([FromBody] ClientUser user)
+        {
+            try
+            {
+                UserLogic.SaveUserSettings_Delete(user);
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, "Errors during User settings deleting: " + ex.Message);
+            }
+        }
+
         [Authorize]
         [HttpGet]
         [Route("api/data/authenticate")]

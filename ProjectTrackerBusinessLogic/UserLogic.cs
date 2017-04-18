@@ -40,5 +40,12 @@ namespace ProjectTrackerBusinessLogic
 
             return u.SaveUserSettings(user);
         }
+
+        public static int SaveUserSettings_Delete(BaseUser user)
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.SaveUserSettings_Delete(user);
+        }
     }
 }
