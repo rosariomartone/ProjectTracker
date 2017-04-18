@@ -172,9 +172,15 @@ namespace ProjectTrackerDataAccess
                     CommandText = "usp_SaveUserSettings"
                 };
 
-                var parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
-                var parameterRole = new SqlParameter("@role", SqlDbType.BigInt) { Value = user.Role.RoleId };
-                var parameterIsActive = new SqlParameter("@isActive", SqlDbType.VarChar) { Value = user.IsActive };
+                SqlParameter parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
+                SqlParameter parameterRole = new SqlParameter("@role", SqlDbType.BigInt) { Value = user.Role.RoleId };
+                SqlParameter parameterIsActive = null;
+
+                if(user.IsActive)
+                    parameterIsActive = new SqlParameter("@isActive", SqlDbType.VarChar) { Value = "1" };
+                else
+                    parameterIsActive = new SqlParameter("@isActive", SqlDbType.VarChar) { Value = "0" };
+
                 command.Parameters.Add(parameterIdUser);
                 command.Parameters.Add(parameterRole);
                 command.Parameters.Add(parameterIsActive);

@@ -135,11 +135,6 @@
                                                                         var dataGrid = JSON.stringify(e.key);
                                                                         var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
                                                                         var apiToken = localStorage.getItem('ProjectTracker_Token');
-                                                                        var isActive = "0";
-
-                                                                        if (e.key["IsActive"] == true)
-                                                                            isActive = "1";
-
                                                                         
                                                                         $.ajax({
                                                                             url: url + "/api/data/usersSettings",
@@ -149,8 +144,8 @@
                                                                             },
                                                                             data: {
                                                                                 Id: e.key["Id"],
-                                                                                isActive: isActive,
-                                                                                Role: e.key["Role.RoleId"]
+                                                                                isActive: e.key["IsActive"],
+                                                                                Role: e.key["Role"]
                                                                             },
                                                                             success: function (data) {
                                                                                 var type = "success";
