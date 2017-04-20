@@ -61,9 +61,9 @@ namespace ProjectTrackerDataAccess
                 {
                     Role role = new Role();
                     role.RoleId = reader.GetInt64(0);
-                    role.Name = reader.GetString(1);
+                    role.Name = reader.GetString(2);
 
-                    if (reader.GetInt32(2) == 1)
+                    if (reader.GetInt32(3) == 1)
                         role.UserType = ProjectTrackerEnum.UserEnumeration.ProximaUser;
                     else
                         role.UserType = ProjectTrackerEnum.UserEnumeration.ClientUser;

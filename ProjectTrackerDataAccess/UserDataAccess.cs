@@ -78,15 +78,15 @@ namespace ProjectTrackerDataAccess
                     UserTypeDataAccess ut = new UserTypeDataAccess();
                     MenuVoicesDataAccess mt = new MenuVoicesDataAccess();
                     Role role = ut.GetRoleById(roleInt);
-                    List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(8));
+                    List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(6));
                     role.Menu = menu;
                     ClientUser user = new ClientUser();
                     user.Id = reader.GetInt64(0);
                     user.Firstname = reader.GetString(1);
                     user.Surname = reader.GetString(2);
                     user.Email = reader.GetString(3);
-                    user.Username = reader.GetString(6);
-                    user.IsActive = bool.Parse(reader.GetString(7));
+                    user.Username = reader.GetString(8);
+                    user.IsActive = reader.GetBoolean(7);
                     user.Role = role;
 
                     users.Add(user);
