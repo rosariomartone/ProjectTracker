@@ -79,8 +79,62 @@
                                     },
                                     success: function (data) {
                                         localStorage.setItem('ProjectTracker_Roles', JSON.stringify(data));
+                                        
+                                        $.ajax({
+                                            url: url + "/api/data/stores",
+                                            type: "GET",
+                                            headers: {
+                                                'Authorization': "bearer " + localStorage.getItem("ProjectTracker_Token"),
+                                            },
+                                            success: function (data) {
+                                                localStorage.setItem('ProjectTracker_Stores', JSON.stringify(data));
 
-                                        document.location.href = "Opportunities.aspx";
+                                                $.ajax({
+                                                    url: url + "/api/data/departments",
+                                                    type: "GET",
+                                                    headers: {
+                                                        'Authorization': "bearer " + localStorage.getItem("ProjectTracker_Token"),
+                                                    },
+                                                    success: function (data) {
+                                                        localStorage.setItem('ProjectTracker_Departments', JSON.stringify(data));
+
+                                                        document.location.href = "Opportunities.aspx";
+                                                    },
+                                                    failure: function (response) {
+                                                        $('#btnLogin').prop('disabled', false);
+
+                                                        var type = "error";
+                                                        var text = response.responseText;
+
+                                                        DevExpress.ui.notify(text, type, 3000);
+                                                    },
+                                                    error: function (response) {
+                                                        $('#btnLogin').prop('disabled', false);
+
+                                                        var type = "error";
+                                                        var text = response.responseText;
+
+                                                        DevExpress.ui.notify(text, type, 3000);
+                                                    }
+                                                });
+                                            },
+                                            failure: function (response) {
+                                                $('#btnLogin').prop('disabled', false);
+
+                                                var type = "error";
+                                                var text = response.responseText;
+
+                                                DevExpress.ui.notify(text, type, 3000);
+                                            },
+                                            error: function (response) {
+                                                $('#btnLogin').prop('disabled', false);
+
+                                                var type = "error";
+                                                var text = response.responseText;
+
+                                                DevExpress.ui.notify(text, type, 3000);
+                                            }
+                                        });
                                     },
                                     failure: function (response) {
                                         $('#btnLogin').prop('disabled', false);

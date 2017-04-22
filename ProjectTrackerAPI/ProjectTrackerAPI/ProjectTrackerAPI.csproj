@@ -144,11 +144,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\ForgottenController.cs" />
     <Compile Include="Controllers\MenuVoiceController.cs" />
     <Compile Include="Controllers\OpportunitiesController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="OAuth\AuthorizeAttributecs.cs" />
     <Compile Include="Global.asax.cs">

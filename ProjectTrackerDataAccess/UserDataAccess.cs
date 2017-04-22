@@ -38,7 +38,17 @@ namespace ProjectTrackerDataAccess
                     Int64 roleInt = reader.GetInt64(4);
                     UserTypeDataAccess ut = new UserTypeDataAccess();
                     MenuVoicesDataAccess mt = new MenuVoicesDataAccess();
+
                     Role role = ut.GetRoleById(roleInt);
+
+                    Store store = new Store();
+                    store.Id = reader.GetInt64(7);
+                    store.Name = reader.GetString(8);
+
+                    Department department = new Department();
+                    department.Id = reader.GetInt64(9);
+                    department.Name = reader.GetString(10);
+
                     List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(6));
                     role.Menu = menu;
                     user = UserFactory.getUser(role);
@@ -49,6 +59,8 @@ namespace ProjectTrackerDataAccess
                     user.Username = username;
                     user.Password = password;
                     user.Role = role;
+                    user.Store = store;
+                    user.Department = department;
                 }
             }
 
@@ -77,9 +89,19 @@ namespace ProjectTrackerDataAccess
                     Int64 roleInt = reader.GetInt64(4);
                     UserTypeDataAccess ut = new UserTypeDataAccess();
                     MenuVoicesDataAccess mt = new MenuVoicesDataAccess();
+
                     Role role = ut.GetRoleById(roleInt);
                     List<MenuBarVoices> menu = mt.GetMenuVoicesByMenuId(reader.GetInt64(6));
                     role.Menu = menu;
+
+                    Store store = new Store();
+                    store.Id = reader.GetInt64(9);
+                    store.Name = reader.GetString(10);
+
+                    Department department = new Department();
+                    department.Id = reader.GetInt64(11);
+                    department.Name = reader.GetString(12);
+
                     ClientUser user = new ClientUser();
                     user.Id = reader.GetInt64(0);
                     user.Firstname = reader.GetString(1);
@@ -88,6 +110,8 @@ namespace ProjectTrackerDataAccess
                     user.Username = reader.GetString(8);
                     user.IsActive = reader.GetBoolean(7);
                     user.Role = role;
+                    user.Store = store;
+                    user.Department = department;
 
                     users.Add(user);
                 }
@@ -174,6 +198,8 @@ namespace ProjectTrackerDataAccess
 
                 SqlParameter parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
                 SqlParameter parameterRole = new SqlParameter("@role", SqlDbType.BigInt) { Value = user.Role.RoleId };
+                SqlParameter parameterStore = new SqlParameter("@store", SqlDbType.BigInt) { Value = user.Store.Id };
+                SqlParameter parameterDepartment = new SqlParameter("@department", SqlDbType.BigInt) { Value = user.Department.Id };
                 SqlParameter parameterIsActive = null;
 
                 if(user.IsActive)
@@ -184,6 +210,8 @@ namespace ProjectTrackerDataAccess
                 command.Parameters.Add(parameterIdUser);
                 command.Parameters.Add(parameterRole);
                 command.Parameters.Add(parameterIsActive);
+                command.Parameters.Add(parameterStore);
+                command.Parameters.Add(parameterDepartment);
 
                 connection.Open();
                 rowAffected = command.ExecuteNonQuery();

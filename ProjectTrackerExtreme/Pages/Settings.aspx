@@ -84,8 +84,9 @@
                        },
                        success: function (data) {
                            localStorage.setItem('ProjectTracker_Token_Role', data);
-                           //var roles = localStorage.getItem('ProjectTracker_Roles');
-                           var roles = [{ "RoleId": 1, "Name": "Admin", "UserType": 1, "Menu": null }, { "RoleId": 2, "Name": "User", "UserType": 2, "Menu": null }];
+                           var roles = JSON.parse(localStorage.getItem('ProjectTracker_Roles'));
+                           var stores = JSON.parse(localStorage.getItem('ProjectTracker_Stores'));
+                           var departments = JSON.parse(localStorage.getItem('ProjectTracker_Departments'));
 
                             $.ajax({
                                     url: url + "/api/data/menuvoices/" + localStorage.getItem("ProjectTracker_Token_Role"),
@@ -131,6 +132,8 @@
                                                                         { dataField: 'Username', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Email', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Role.RoleId', caption: 'Role', lookup: { dataSource: roles, valueExpr: 'RoleId', displayExpr: 'Name' } },
+                                                                        { dataField: 'Store.Id', caption: 'Store', lookup: { dataSource: stores, valueExpr: 'Id', displayExpr: 'Name' } },
+                                                                        { dataField: 'Department.Id', caption: 'Department', lookup: { dataSource: departments, valueExpr: 'Id', displayExpr: 'Name' } },
                                                                         { dataField: 'IsActive', width: 100, dataType: 'boolean', caption: 'Active' }
                                                                     ],
                                                                     selection: {
@@ -173,7 +176,9 @@
                                                                             data: {
                                                                                 Id: e.key["Id"],
                                                                                 isActive: e.key["IsActive"],
-                                                                                Role: e.key["Role"]
+                                                                                Role: e.key["Role"],
+                                                                                Store: e.key["Store"],
+                                                                                Department: e.key["Department"]
                                                                             },
                                                                             success: function (data) {
                                                                                 var type = "success";
