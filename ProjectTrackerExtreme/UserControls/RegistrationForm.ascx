@@ -144,24 +144,19 @@
     </div>
 </div>
 <script>
-    function validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
     function validate() {
         var email = $("#txtEmail").val();
 
-        if (!validateEmail(email)) {
-            var type = "error";
-            var text = "Email non valid!";
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+            return true;
+        else {
+            var type = "warning";
+            var text = "Email not valid!";
 
             DevExpress.ui.notify(text, type, 3000);
 
-            return true;
+            return false;
         }
-        else
-            return true;
     }
 
     $(document).ready(
