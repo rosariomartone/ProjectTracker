@@ -61,7 +61,7 @@ namespace ProjectTrackerDataAccess
                     user.Role = role;
                     user.Store = store;
                     user.Department = department;
-                    user.IsPasswordRecovered = Boolean.Parse(reader.GetString(11));
+                    user.IsPasswordRecovered = reader.GetBoolean(11);
                 }
             }
 

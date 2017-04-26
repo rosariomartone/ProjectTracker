@@ -123,6 +123,7 @@
     <Content Include="Content\site.css" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\ChangeUserPassword.aspx" />
     <Content Include="Pages\ForgottenPage.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\LoginPage.aspx" />
@@ -219,6 +220,13 @@
     </Compile>
     <Compile Include="Layout.master.designer.cs">
       <DependentUpon>Layout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ChangeUserPassword.aspx.cs">
+      <DependentUpon>ChangeUserPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ChangeUserPassword.aspx.designer.cs">
+      <DependentUpon>ChangeUserPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ForgottenPage.aspx.cs">
       <DependentUpon>ForgottenPage.aspx</DependentUpon>
