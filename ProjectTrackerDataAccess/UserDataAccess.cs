@@ -61,6 +61,7 @@ namespace ProjectTrackerDataAccess
                     user.Role = role;
                     user.Store = store;
                     user.Department = department;
+                    user.IsPasswordRecovered = Boolean.Parse(reader.GetString(11));
                 }
             }
 
@@ -198,7 +199,6 @@ namespace ProjectTrackerDataAccess
 
                 SqlParameter parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = user.Id };
                 SqlParameter parameterRole = new SqlParameter("@role", SqlDbType.BigInt) { Value = user.Role.RoleId };
-                SqlParameter parameterStore = new SqlParameter("@store", SqlDbType.BigInt) { Value = user.Store.Id };
                 SqlParameter parameterDepartment = new SqlParameter("@department", SqlDbType.BigInt) { Value = user.Department.Id };
                 SqlParameter parameterIsActive = null;
 
@@ -210,7 +210,6 @@ namespace ProjectTrackerDataAccess
                 command.Parameters.Add(parameterIdUser);
                 command.Parameters.Add(parameterRole);
                 command.Parameters.Add(parameterIsActive);
-                command.Parameters.Add(parameterStore);
                 command.Parameters.Add(parameterDepartment);
 
                 connection.Open();

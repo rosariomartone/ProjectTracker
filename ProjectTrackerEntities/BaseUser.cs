@@ -23,5 +23,7 @@ namespace ProjectTrackerEntities
         public Store Store { get; set; }
 
         public Department Department { get; set; }
+
+        public bool IsPasswordRecovered { get; set; }
     }
 }

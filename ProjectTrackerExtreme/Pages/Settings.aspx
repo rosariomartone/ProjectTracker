@@ -132,8 +132,29 @@
                                                                         { dataField: 'Username', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Email', dataType: 'string', allowEditing: false },
                                                                         { dataField: 'Role.RoleId', caption: 'Role', lookup: { dataSource: roles, valueExpr: 'RoleId', displayExpr: 'Name' } },
-                                                                        { dataField: 'Store.Id', caption: 'Store', lookup: { dataSource: stores, valueExpr: 'Id', displayExpr: 'Name' } },
-                                                                        { dataField: 'Department.Id', caption: 'Department', lookup: { dataSource: departments, valueExpr: 'Id', displayExpr: 'Name' } },
+                                                                        {
+                                                                            dataField: 'Store.Id', caption: 'Store', lookup: {
+                                                                                dataSource: stores, valueExpr: 'Id', displayExpr: 'Name',
+                                                                                setCellValue: function (rowData, value) {
+                                                                                    rowData.Department = null;
+                                                                                    this.defaultSetCellValue(rowData, value);
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            dataField: 'Department.Id', caption: 'Department', lookup: {
+                                                                                dataSource: function (options) {
+                                                                                    var dataSourceConfiguration = {
+                                                                                        store: departments
+                                                                                    };
+                                                                                    if (options.data) {
+                                                                                        dataSourceConfiguration.filter = ['Store.Id', '=', options.data.Store.Id];
+                                                                                    }
+                                                                                    return dataSourceConfiguration;
+                                                                                },
+                                                                                valueExpr: 'Id', displayExpr: 'Name'
+                                                                            }
+                                                                        },
                                                                         { dataField: 'IsActive', width: 100, dataType: 'boolean', caption: 'Active' }
                                                                     ],
                                                                     selection: {
