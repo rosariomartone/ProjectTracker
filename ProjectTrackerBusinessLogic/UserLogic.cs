@@ -13,6 +13,13 @@ namespace ProjectTrackerBusinessLogic
             return u.GetUser(username, password);
         }
 
+        public static BaseUser CheckUser(string username, string password)
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.CheckUser(username, password);
+        }
+
         public static List<BaseUser> GetUsers()
         {
             UserDataAccess u = new UserDataAccess();

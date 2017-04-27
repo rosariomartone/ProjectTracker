@@ -61,44 +61,70 @@
                         var url = '<%= ConfigurationManager.AppSettings["API_URL"].ToString() %>';
 
                         $.ajax({
-                            url: url + "/token",
+                            url: url + "/api/data/userCheck",
                             type: "POST",
-                            data : {
-                                username : $('#txtUsername').val(),
-                                password : $('#txtPassword').val(),
-                                grant_type : "password"
+                            data: {
+                                username: $('#txtUsername').val(),
+                                password: $('#txtPassword').val()
                             },
                             success: function (data) {
-                                localStorage.setItem("ProjectTracker_Token", data.access_token);
-
                                 $.ajax({
-                                    url: url + "/api/data/roles",
-                                    type: "GET",
-                                    headers: {
-                                        'Authorization': "bearer " + data.access_token,
+                                    url: url + "/token",
+                                    type: "POST",
+                                    data: {
+                                        username: $('#txtUsername').val(),
+                                        password: $('#txtPassword').val(),
+                                        grant_type: "password"
                                     },
                                     success: function (data) {
-                                        localStorage.setItem('ProjectTracker_Roles', JSON.stringify(data));
-                                        
+                                        localStorage.setItem("ProjectTracker_Token", data.access_token);
+
                                         $.ajax({
-                                            url: url + "/api/data/stores",
+                                            url: url + "/api/data/roles",
                                             type: "GET",
                                             headers: {
-                                                'Authorization': "bearer " + localStorage.getItem("ProjectTracker_Token"),
+                                                'Authorization': "bearer " + data.access_token,
                                             },
                                             success: function (data) {
-                                                localStorage.setItem('ProjectTracker_Stores', JSON.stringify(data));
+                                                localStorage.setItem('ProjectTracker_Roles', JSON.stringify(data));
 
                                                 $.ajax({
-                                                    url: url + "/api/data/departments",
+                                                    url: url + "/api/data/stores",
                                                     type: "GET",
                                                     headers: {
                                                         'Authorization': "bearer " + localStorage.getItem("ProjectTracker_Token"),
                                                     },
                                                     success: function (data) {
-                                                        localStorage.setItem('ProjectTracker_Departments', JSON.stringify(data));
+                                                        localStorage.setItem('ProjectTracker_Stores', JSON.stringify(data));
 
-                                                        document.location.href = "Opportunities.aspx";
+                                                        $.ajax({
+                                                            url: url + "/api/data/departments",
+                                                            type: "GET",
+                                                            headers: {
+                                                                'Authorization': "bearer " + localStorage.getItem("ProjectTracker_Token"),
+                                                            },
+                                                            success: function (data) {
+                                                                localStorage.setItem('ProjectTracker_Departments', JSON.stringify(data));
+
+                                                                document.location.href = "Opportunities.aspx";
+                                                            },
+                                                            failure: function (response) {
+                                                                $('#btnLogin').prop('disabled', false);
+
+                                                                var type = "error";
+                                                                var text = response.responseText;
+
+                                                                DevExpress.ui.notify(text, type, 3000);
+                                                            },
+                                                            error: function (response) {
+                                                                $('#btnLogin').prop('disabled', false);
+
+                                                                var type = "error";
+                                                                var text = response.responseText;
+
+                                                                DevExpress.ui.notify(text, type, 3000);
+                                                            }
+                                                        });
                                                     },
                                                     failure: function (response) {
                                                         $('#btnLogin').prop('disabled', false);
@@ -155,16 +181,12 @@
                                 });
                             },
                             failure: function (response) {
-                                $('#btnLogin').prop('disabled', false);
-
                                 var type = "error";
                                 var text = response.responseText;
 
                                 DevExpress.ui.notify(text, type, 3000);
                             },
                             error: function (response) {
-                                $('#btnLogin').prop('disabled', false);
-
                                 var type = "error";
                                 var text = response.responseText;
 

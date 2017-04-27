@@ -68,6 +68,35 @@ namespace ProjectTrackerDataAccess
             return user;
         }
 
+        public BaseUser CheckUser(string username, string password)
+        {
+            BaseUser user = new ClientUser();
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_CheckUser"
+                };
+
+                var parameterUsername = new SqlParameter("@username", SqlDbType.VarChar) { Value = username };
+                var parameterPassword = new SqlParameter("@password", SqlDbType.VarChar) { Value = password };
+                command.Parameters.Add(parameterUsername);
+                command.Parameters.Add(parameterPassword);
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                if (reader.Read())
+                    user.IsPasswordRecovered = reader.GetBoolean(0);
+            }
+
+            return user;
+        }
+
         public List<BaseUser> GetUsers()
         {
             List<BaseUser> users = new List<BaseUser>();

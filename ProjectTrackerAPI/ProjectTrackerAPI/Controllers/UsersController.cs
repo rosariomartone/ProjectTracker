@@ -7,6 +7,7 @@ using System;
 using System.Security.Claims;
 
 using System.Linq;
+using ProjectTrackerUtilities;
 
 namespace ProjectTrackerAPI.Controllers
 {
@@ -18,6 +19,20 @@ namespace ProjectTrackerAPI.Controllers
         public IHttpActionResult GetUsers()
         {
             return Ok(UserLogic.GetUsers());
+        }
+
+        [HttpPost]
+        [Route("api/data/userCheck")]
+        public IHttpActionResult GetUser([FromBody] ClientUser user)
+        {
+            BaseUser userCheck = UserLogic.CheckUser(user.Username, MD5Utility.GetMD5Password(user.Password));
+
+            if(userCheck == null)
+                return BadRequest("Username or password invalid.");
+            else if(userCheck.IsPasswordRecovered)
+                return BadRequest("This user requested a password reset.");
+            else
+                return Ok(userCheck);
         }
 
         [Authorize(Roles = "Admin")]
