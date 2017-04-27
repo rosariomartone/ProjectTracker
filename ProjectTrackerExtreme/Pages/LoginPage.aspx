@@ -184,12 +184,14 @@
                                 var type = "error";
                                 var text = response.responseText;
 
+                                $('#btnLogin').prop('disabled', false);
                                 DevExpress.ui.notify(text, type, 3000);
                             },
                             error: function (response) {
                                 var type = "error";
                                 var text = response.responseText;
 
+                                $('#btnLogin').prop('disabled', false);
                                 DevExpress.ui.notify(text, type, 3000);
                             }
                         });
