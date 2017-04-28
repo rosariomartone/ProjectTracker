@@ -35,6 +35,19 @@ namespace ProjectTrackerAPI.Controllers
                 return Ok(userCheck);
         }
 
+        [HttpPost]
+        [Route("api/data/changePassword")]
+        public IHttpActionResult ChangePassword([FromBody] ClientUser user)
+        {
+            Int64 userID = 
+            BaseUser userChanged = UserLogic.ChangeUser(userID, MD5Utility.GetMD5Password(user.Password));
+
+            if (userChanged == null)
+                return BadRequest("Invalid data.");
+            else
+                return Ok("Passord changed.");
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("api/data/usersSettings")]

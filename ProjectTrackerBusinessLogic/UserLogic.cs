@@ -20,6 +20,13 @@ namespace ProjectTrackerBusinessLogic
             return u.CheckUser(username, password);
         }
 
+        public static long ChangeUser(int userID, string password)
+        {
+            UserDataAccess u = new UserDataAccess();
+
+            return u.ChangeUser(userID, password);
+        }
+
         public static List<BaseUser> GetUsers()
         {
             UserDataAccess u = new UserDataAccess();

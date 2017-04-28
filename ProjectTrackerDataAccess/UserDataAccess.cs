@@ -185,6 +185,41 @@ namespace ProjectTrackerDataAccess
             return addUser;
         }
 
+        public long ChangeUser(int userID, string password)
+        {
+            long addUser = 0;
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_ChangePasswordUser"
+                };
+
+                var parameterFirstname = new SqlParameter("@firstname", SqlDbType.VarChar) { Value = user.Firstname };
+                var parameterSurname = new SqlParameter("@surname", SqlDbType.VarChar) { Value = user.Surname };
+                var parameterEmail = new SqlParameter("@email", SqlDbType.VarChar) { Value = user.Email };
+                var parameterUsername = new SqlParameter("@username", SqlDbType.VarChar) { Value = user.Email };
+                var parameterPassword = new SqlParameter("@password", SqlDbType.VarChar) { Value = user.Password };
+                command.Parameters.Add(parameterFirstname);
+                command.Parameters.Add(parameterSurname);
+                command.Parameters.Add(parameterEmail);
+                command.Parameters.Add(parameterUsername);
+                command.Parameters.Add(parameterPassword);
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                if (reader.Read())
+                    addUser = reader.GetInt32(0);
+            }
+
+            return addUser;
+        }
+
         public long RetrieveUser(ClientUser user)
         {
             long retrieveUser = 0;
