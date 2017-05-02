@@ -185,9 +185,9 @@ namespace ProjectTrackerDataAccess
             return addUser;
         }
 
-        public long ChangeUser(int userID, string password)
+        public long ChangeUser(long userID, string password)
         {
-            long addUser = 0;
+            long changeUser = 0;
             var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
 
             using (var connection = new SqlConnection(connectionString))
@@ -199,25 +199,19 @@ namespace ProjectTrackerDataAccess
                     CommandText = "usp_ChangePasswordUser"
                 };
 
-                var parameterFirstname = new SqlParameter("@firstname", SqlDbType.VarChar) { Value = user.Firstname };
-                var parameterSurname = new SqlParameter("@surname", SqlDbType.VarChar) { Value = user.Surname };
-                var parameterEmail = new SqlParameter("@email", SqlDbType.VarChar) { Value = user.Email };
-                var parameterUsername = new SqlParameter("@username", SqlDbType.VarChar) { Value = user.Email };
-                var parameterPassword = new SqlParameter("@password", SqlDbType.VarChar) { Value = user.Password };
-                command.Parameters.Add(parameterFirstname);
-                command.Parameters.Add(parameterSurname);
-                command.Parameters.Add(parameterEmail);
-                command.Parameters.Add(parameterUsername);
+                var parameterIdUser = new SqlParameter("@idUser", SqlDbType.BigInt) { Value = userID };
+                var parameterPassword = new SqlParameter("@password", SqlDbType.VarChar) { Value = password };
+                command.Parameters.Add(parameterIdUser);
                 command.Parameters.Add(parameterPassword);
 
                 connection.Open();
                 var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
                 if (reader.Read())
-                    addUser = reader.GetInt32(0);
+                    changeUser = reader.GetInt32(0);
             }
 
-            return addUser;
+            return changeUser;
         }
 
         public long RetrieveUser(ClientUser user)
@@ -242,6 +236,63 @@ namespace ProjectTrackerDataAccess
 
                 if (reader.Read())
                     retrieveUser = reader.GetInt32(0);
+            }
+
+            return retrieveUser;
+        }
+
+        public long GetUserIdByEmail(string email)
+        {
+            long retrieveUser = 0;
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_getUserIdByEmail"
+                };
+
+                var parameterEmail = new SqlParameter("@email", SqlDbType.VarChar) { Value = email };
+                command.Parameters.Add(parameterEmail);
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                if (reader.Read())
+                    retrieveUser = reader.GetInt32(0);
+            }
+
+            return retrieveUser;
+        }
+
+        public BaseUser GetUserIdByToken(string token)
+        {
+            BaseUser retrieveUser = null;
+            var connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "usp_getUserIdByToken"
+                };
+
+                var parameterEmail = new SqlParameter("@token", SqlDbType.VarChar) { Value = token };
+                command.Parameters.Add(parameterEmail);
+
+                connection.Open();
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                if (reader.Read())
+                {
+                    retrieveUser = new ClientUser();
+                    retrieveUser.Id= reader.GetInt32(0);
+                }
             }
 
             return retrieveUser;

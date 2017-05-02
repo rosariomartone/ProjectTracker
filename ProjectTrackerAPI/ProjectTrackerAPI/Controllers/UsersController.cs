@@ -30,7 +30,7 @@ namespace ProjectTrackerAPI.Controllers
             if(userCheck == null)
                 return BadRequest("Username or password invalid.");
             else if(userCheck.IsPasswordRecovered)
-                return BadRequest("This user requested a password reset.");
+                return BadRequest("This user is locked.");
             else
                 return Ok(userCheck);
         }
@@ -39,10 +39,13 @@ namespace ProjectTrackerAPI.Controllers
         [Route("api/data/changePassword")]
         public IHttpActionResult ChangePassword([FromBody] ClientUser user)
         {
-            Int64 userID = 
-            BaseUser userChanged = UserLogic.ChangeUser(userID, MD5Utility.GetMD5Password(user.Password));
+            Int64 userChanged = 0;
+            BaseUser userCheck = UserLogic.GetUserIdByToken(user.Token);
 
-            if (userChanged == null)
+            if(userCheck.Id > 0)
+                userChanged = UserLogic.ChangeUser(userCheck.Id, MD5Utility.GetMD5Password(user.Password));
+
+            if (userChanged == 0)
                 return BadRequest("Invalid data.");
             else
                 return Ok("Passord changed.");

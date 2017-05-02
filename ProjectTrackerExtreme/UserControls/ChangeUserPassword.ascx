@@ -71,6 +71,19 @@
 
 </style>
 
+<script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+</script>
+
 <div class="container">
     <div class="row" style="margin-top:60px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
@@ -127,8 +140,8 @@
                             url: url + "/api/data/changePassword",
                             type: "POST",
                             data: {
-                                token: //Take value from url query string,
-                                newpassword: $('#txtPassword').val()
+                                token: getParameterByName('token'),
+                                password: $('#txtPassword').val()
                             },
                             success: function (data) {
                                 var type = "info";
